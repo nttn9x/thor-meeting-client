@@ -1,37 +1,18 @@
-import { useEffect, useRef } from "react";
+import { useContext } from "react";
 
-import useRoomHook from "./use-room.hook";
-
-const VideoPlayer: React.FC<{ stream?: MediaStream }> = ({ stream }) => {
-  const videoRef = useRef<HTMLVideoElement>(null);
-
-  useEffect(() => {
-    if (videoRef.current && stream) videoRef.current.srcObject = stream;
-  }, [stream]);
-
-  return (
-    <video
-      data-testid="peer-video"
-      style={{ width: 100, height: 100 }}
-      ref={videoRef}
-      autoPlay
-      muted={true}
-    />
-  );
-};
+import Videos from "./room-videos.component";
+import { RoomContext } from "./room.context";
 
 export default function Room() {
-  const { stream, peers } = useRoomHook();
+  const { isConnected } = useContext(RoomContext);
+
+  if (!isConnected) {
+    return <>Connecting</>;
+  }
+
   return (
-    <div className="flex h-ful">
-      aadsad
-      <VideoPlayer stream={stream} />
-      {peers.map((peer: any, index: number) => (
-        <div key={index}>
-          <VideoPlayer stream={peer.stream} />
-          <div>{peer.peerId}</div>
-        </div>
-      ))}
+    <div className="flex justify-center">
+      <Videos />
     </div>
   );
 }
