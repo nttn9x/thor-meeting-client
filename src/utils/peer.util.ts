@@ -2,7 +2,7 @@ import peerjs from "peerjs";
 
 export let me: any;
 
-export const connectPeerJs = async (roomId?: string) => {
+export const connectPeerJs = async () => {
   me = new peerjs();
 };
 
