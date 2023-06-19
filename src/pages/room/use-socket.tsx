@@ -10,7 +10,7 @@ export default function useSocket() {
     }
 
     (async () => {
-      const socket = await io("http://localhost:3001");
+      const socket = await io("https://thor-meeting-server.onrender.com");
 
       setSocket(socket);
     })();
