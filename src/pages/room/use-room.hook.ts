@@ -1,7 +1,6 @@
-import { useEffect, useState } from "react";
-import { Routes, Route, useParams } from "react-router-dom";
-import { io } from "socket.io-client";
 import peerjs from "peerjs";
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 
 import useSocket from "./use-socket";
 
