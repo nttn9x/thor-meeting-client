@@ -54,6 +54,8 @@ export const addJoinedListener = async (stream: MediaStream, setPeers: any) => {
   window.socket.on(
     "room:joined",
     ({ peerId, participants }: { peerId: string; participants: any }) => {
+      console.log("participants", participants);
+
       const call = me.call(peerId, stream);
       call.on("stream", (peerStream: any) => {
         setPeers((prev: any) => {
