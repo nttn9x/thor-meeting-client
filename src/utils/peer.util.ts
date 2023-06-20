@@ -3,7 +3,10 @@ import peerjs from "peerjs";
 export let me: any;
 
 export const connectPeerJs = async () => {
-  me = new peerjs();
+  if (!window.me) {
+    me = new peerjs();
+    window.me = me;
+  }
 };
 
 export const addOpenListener = async (roomId: string) => {
