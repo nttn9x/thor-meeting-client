@@ -150,7 +150,7 @@ export default function useRoomHook() {
 
     function handleDisconnect(userId: any) {
       delete peers[userId];
-      document.getElementById(userId).remove();
+      document.getElementById(userId)!.remove();
     }
 
     socket.on("connect", async () => {
