@@ -1,7 +1,9 @@
 import clsx from "clsx";
 import React from "react";
 
-interface IInput extends React.HTMLAttributes<HTMLInputElement> {}
+interface IInput extends React.HTMLAttributes<HTMLInputElement> {
+  value?: string;
+}
 
 export default function Input({ className, ...rest }: IInput) {
   return (

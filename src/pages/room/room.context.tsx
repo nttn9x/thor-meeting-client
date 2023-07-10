@@ -1,34 +1,22 @@
-import { createContext, useEffect, useState } from "react";
-import { connectSocket } from "@thor/utils/socket.util";
-import { connectPeerJs } from "@thor/utils/peer.util";
+import { useSocket } from "@thor/context/socket.context";
+import { createContext, useEffect } from "react";
+import { useParams } from "react-router-dom";
 
-interface IRoom {
-  isConnected: boolean; // socket is connected
-}
-
-const emptyState = { isConnected: false };
-
-export const RoomContext = createContext(emptyState);
+export const RoomContext = createContext({});
 
 interface IProps {
   children: React.ReactNode;
 }
 
 const Room = ({ children }: IProps) => {
-  const [state, setState] = useState<IRoom>(emptyState);
+  const { roomId } = useParams();
+  const socket = useSocket();
 
   useEffect(() => {
-    (async () => {
-      await connectSocket();
-      await connectPeerJs();
+    socket.emit("room:join", { roomId });
+  }, [roomId]);
 
-      window.socket?.on("socket:connected", () => {
-        setState({ isConnected: true });
-      });
-    })();
-  }, [setState]);
-
-  return <RoomContext.Provider value={state}>{children}</RoomContext.Provider>;
+  return <RoomContext.Provider value={{}}>{children}</RoomContext.Provider>;
 };
 
 export default Room;

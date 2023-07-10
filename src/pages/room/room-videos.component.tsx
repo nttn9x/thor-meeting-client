@@ -21,23 +21,22 @@ const VideoPlayer: React.FC<{ stream?: MediaStream }> = ({ stream }) => {
 };
 
 export default function RoomVideos() {
-  const { stream, peers } = useRoomHook();
+  const { refVideos, localStream } = useRoomHook();
 
   return (
-    <div className="container max-w-screen-lg grid grid-cols-4 gap-4 h-ful">
-      <VideoPlayer stream={stream} />
-      {peers.map((peer: any, index: number) => {
-        if (peer.peerId === window.peerId) {
-          return null;
-        }
-
+    <div
+      ref={refVideos}
+      className="container max-w-screen-lg grid grid-cols-4 gap-4 h-ful"
+    >
+      <VideoPlayer stream={localStream} />
+      {/* {users?.map((p: any, i: number) => {
         return (
-          <div key={index}>
-            <VideoPlayer stream={peer.stream} />
-            <div>{peer.peerId}</div>
+          <div key={i}>
+            <VideoPlayer stream={p.stream} />
+            <div>{i + "index"}</div>
           </div>
         );
-      })}
+      })} */}
     </div>
   );
 }
