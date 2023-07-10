@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Routes, Outlet } from "react-router-dom";
 import Welcome from "./pages/welcome";
 import Lobby from "./pages/lobby";
 import Room from "./pages/room";
+import { Suspense } from "react";
 
 const Layout = () => {
   return (
@@ -18,13 +19,15 @@ const Layout = () => {
 const App = () => {
   return (
     <BrowserRouter>
-      <Routes>
-        <Route path="/" Component={Layout}>
-          <Route index element={<Welcome />} />
-          <Route path="lobby" element={<Lobby />} />
-          <Route path="room/:roomId" element={<Room />} />
-        </Route>
-      </Routes>
+      <Suspense fallback={<p> Loading...</p>}>
+        <Routes>
+          <Route path="/" Component={Layout}>
+            <Route index element={<Lobby />} />
+            <Route path="room/:roomId" element={<Room />} />
+            <Route path="name/:roomId" element={<Welcome />} />
+          </Route>
+        </Routes>
+      </Suspense>
     </BrowserRouter>
   );
 };

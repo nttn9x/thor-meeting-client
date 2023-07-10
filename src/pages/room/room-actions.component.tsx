@@ -1,29 +1,40 @@
 import { useNavigate } from "react-router-dom";
 
-import { PhoneOff, VideoOff, Video, Mic, MicOff } from "react-feather";
+import { Mic, MicOff, PhoneOff, Video, VideoOff } from "react-feather";
 
 import { AppRouters } from "@thor/constants";
 import Button from "@thor/system-ui/button";
+import clsx from "clsx";
+import { useRoomContext } from "./room.context";
 
-export default function RoomActions({
-  showCamera,
-  toggleCamera,
-  enableMic,
-  toggleMic,
-}: any) {
+export default function RoomActions() {
   const navigate = useNavigate();
+  const {
+    toggleMedia,
+    state: { localStream, device },
+  } = useRoomContext();
 
   const join = () => {
-    navigate(AppRouters.Lobby);
+    navigate(AppRouters.Lobby, { replace: true });
   };
 
+  if (!localStream) {
+    return null;
+  }
+
   return (
-    <div className="h-20 md:h-28 flex items-center justify-center gap-3">
+    <div className="flex-initial py-6 flex items-center justify-center gap-3">
       <Button
-        className="rounded-full h-12 w-12 px-0 flex justify-center items-center"
-        onClick={toggleCamera}
+        onClick={() => toggleMedia?.("video")}
+        className={clsx(
+          "rounded-full h-12 w-12 px-0 flex justify-center items-center text-primary-500",
+          {
+            ["bg-slate-200"]: device.video,
+            ["bg-slate-600"]: !device.video,
+          }
+        )}
       >
-        {showCamera ? <VideoOff /> : <Video />}
+        {device.video ? <Video /> : <VideoOff />}
       </Button>
       <Button
         variant="primary"
@@ -34,10 +45,16 @@ export default function RoomActions({
       </Button>
 
       <Button
-        className="rounded-full h-12 w-12 px-0 flex justify-center items-center"
-        onClick={toggleMic}
+        onClick={() => toggleMedia?.("audio")}
+        className={clsx(
+          "rounded-full h-12 w-12 px-0 flex justify-center items-center text-primary-500",
+          {
+            ["bg-slate-200"]: device.audio,
+            ["bg-slate-600"]: !device.audio,
+          }
+        )}
       >
-        {enableMic ? <MicOff /> : <Mic />}
+        {device.audio ? <Mic /> : <MicOff />}
       </Button>
     </div>
   );

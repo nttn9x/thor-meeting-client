@@ -1,16 +1,6 @@
-// import { useAppSelector } from "@thor/store";
 import Actions from "./lobby-actions.component";
-// import { Navigate } from "react-router-dom";
-// import { AppRouters } from "@thor/constants";
-// import _isEmpty from "lodash/isEmpty";
 
 const DashBoard = () => {
-  // const user = useAppSelector((state) => state.user);
-
-  // if (_isEmpty(user)) {
-  //   return <Navigate to={AppRouters.Welcome} replace={true} />;
-  // }
-
   return (
     <>
       <div className="flex p-8 md:p-16 gap-2">

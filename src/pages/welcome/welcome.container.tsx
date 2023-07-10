@@ -1,16 +1,16 @@
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Navigate } from "react-router-dom";
+import { Navigate, useParams } from "react-router-dom";
 import _isEmpty from "lodash/isEmpty";
 
 import { useAppDispatch, useAppSelector } from "@thor/store";
 import { setUser } from "@thor/store/slices/user/user.slice";
 import Button from "@thor/system-ui/button";
 import Input from "@thor/system-ui/input";
-import { AppRouters } from "@thor/constants";
 
 const DashBoard = () => {
   const dispatch = useAppDispatch();
+  const { roomId } = useParams();
   const user = useAppSelector((state) => state.user);
   const { t } = useTranslation();
   const [name, setName] = useState<string>("");
@@ -20,11 +20,14 @@ const DashBoard = () => {
   };
 
   const join = () => {
+    if (!name) {
+      return;
+    }
     dispatch(setUser({ user: { name } }));
   };
 
   if (!_isEmpty(user)) {
-    return <Navigate to={AppRouters.Lobby} replace={true} />;
+    return <Navigate to={`/room/${roomId}`} replace={true} />;
   }
 
   return (
@@ -39,6 +42,7 @@ const DashBoard = () => {
           value={name}
           placeholder={t("enter_your_name")}
           onChange={onNameChange}
+          onEnter={join}
         />
 
         <Button

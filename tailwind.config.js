@@ -9,6 +9,7 @@ export default {
       slate: colors.slate,
       red: colors.red,
       gray: colors.gray,
+      white: colors.white,
     },
     extend: {},
   },

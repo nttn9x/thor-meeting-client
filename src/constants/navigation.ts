@@ -1,5 +1,5 @@
 export enum AppRouters {
-  Welcome = "/",
-  Lobby = "/lobby",
+  Welcome = "/name/:roomId",
+  Lobby = "/",
   Room = "/room/:roomId",
 }

@@ -3,9 +3,16 @@ import React from "react";
 
 interface IInput extends React.HTMLAttributes<HTMLInputElement> {
   value?: string;
+  onEnter?: (e: React.KeyboardEvent<HTMLInputElement>) => void;
 }
 
-export default function Input({ className, ...rest }: IInput) {
+export default function Input({ className, onEnter, ...rest }: IInput) {
+  const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key == "Enter") {
+      onEnter?.(e);
+    }
+  };
+
   return (
     <input
       className={clsx(
@@ -13,6 +20,7 @@ export default function Input({ className, ...rest }: IInput) {
         className
       )}
       placeholder="you@example.com"
+      onKeyUp={handleKeyPress}
       {...rest}
     />
   );
