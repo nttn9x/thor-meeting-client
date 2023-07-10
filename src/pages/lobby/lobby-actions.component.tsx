@@ -30,8 +30,8 @@ const DashBoardActions = () => {
       <Input
         placeholder="Enter a code"
         className={clsx({
-          "peer !w-80 focus:!w-64": !code,
-          "!w-64": code,
+          "peer !w-80 focus:w-full focus:md:!w-64": !code,
+          "!w-full md:!w-64": code,
         })}
         onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
           setCode(e.target.value)

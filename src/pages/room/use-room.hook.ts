@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import io from "socket.io-client";
 
 import { useParams } from "react-router-dom";
@@ -19,6 +19,8 @@ async function getLocalStream(
 export default function useRoomHook() {
   const { roomId } = useParams();
   const [localStream, setLocalStream] = useState<MediaStream>();
+  const [showCamera, setShowCamera] = useState<boolean>(true);
+  const [enableMic, setEnableMic] = useState<boolean>(true);
   const refVideos = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -58,11 +60,18 @@ export default function useRoomHook() {
         console.log("ontrack");
         const container = document.createElement("div");
         container.classList.add("remote-video-container");
+        container.classList.add("w-full");
+        container.classList.add("h-full");
+        container.classList.add("rounded-lg");
+        container.classList.add("overflow-hidden");
         const video = document.createElement("video");
         video.srcObject = e.streams[0];
         video.autoplay = true;
         video.playsInline = true;
         video.classList.add("remote-video");
+        video.classList.add("h-full");
+        video.classList.add("w-full");
+        video.classList.add("object-cover");
         container.appendChild(video);
 
         container.id = userIdToCall;
@@ -175,5 +184,31 @@ export default function useRoomHook() {
     };
   }, [localStream, roomId, refVideos]);
 
-  return { refVideos, localStream };
+  const toggleCamera = useCallback(() => {
+    const videoTrack = localStream!
+      .getTracks()
+      .find((track) => track.kind === "video");
+
+    setShowCamera(!videoTrack!.enabled);
+
+    videoTrack!.enabled = !videoTrack!.enabled;
+  }, [localStream, setShowCamera]);
+
+  const toggleMic = useCallback(() => {
+    const audioTrack = localStream!
+      .getTracks()
+      .find((track) => track.kind === "audio");
+    setEnableMic(!audioTrack!.enabled);
+
+    audioTrack!.enabled = !audioTrack!.enabled;
+  }, [localStream, setEnableMic]);
+
+  return {
+    refVideos,
+    localStream,
+    showCamera,
+    toggleCamera,
+    enableMic,
+    toggleMic,
+  };
 }

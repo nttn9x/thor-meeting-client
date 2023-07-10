@@ -7,6 +7,7 @@ export default {
     colors: {
       primary: colors.indigo,
       slate: colors.slate,
+      red: colors.red,
       gray: colors.gray,
     },
     extend: {},

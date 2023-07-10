@@ -29,7 +29,7 @@ const DashBoard = () => {
 
   return (
     <div className="flex h-full items-center justify-center">
-      <div className="w-96 mt-10 flex flex-wrap gap-6">
+      <div className="w-80 md:w-96  flex flex-wrap gap-6">
         <div className="mb-10 w-full text-center">
           <label className="text-5xl">{t("what_s_your_name")}</label>
         </div>
