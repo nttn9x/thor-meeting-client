@@ -4,11 +4,9 @@ import rootReducer from "./reducers";
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
 // import rootSaga from "./rootSaga";
 
-import { api as roomApi } from "./slices/room/room.slice";
-
 function configureAppStore() {
   const sagaMiddleware = createSagaMiddleware();
-  const middleware = [sagaMiddleware, roomApi.middleware];
+  const middleware = [sagaMiddleware];
 
   const store = configureStore({
     reducer: rootReducer,
