@@ -39,7 +39,7 @@ export default function RoomVideos() {
         {device.video && <VideoPlayer stream={localStream} />}
         {!device.video && (
           <div className="border-2 border-primary-400 border-solid w-full h-full rounded-lg bg-slate-800 flex justify-center items-center">
-            <div className="w-40 md:w-60 h-40 md:h-60 bg-slate-700 rounded-full flex justify-center items-center text-8xl capitalize">
+            <div className="w-40 md:w-60 h-40 md:h-60 bg-slate-700 rounded-full flex justify-center items-center text-6xl md:text-8xl capitalize">
               {user.name?.charAt(0)}
             </div>
           </div>

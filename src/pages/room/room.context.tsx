@@ -1,3 +1,4 @@
+import { useAppSelector } from "@thor/store";
 import {
   createContext,
   useCallback,
@@ -8,7 +9,6 @@ import {
 } from "react";
 import { useParams } from "react-router-dom";
 import { Socket, io } from "socket.io-client";
-import { v4 as uuidv4 } from "uuid";
 
 interface IProps {
   children: React.ReactNode;
@@ -73,6 +73,7 @@ function getGridTemplate(count: number) {
 
 const Room = ({ children }: IProps) => {
   const { roomId } = useParams();
+  const user = useAppSelector((state) => state.user);
   const refVideos = useRef<HTMLDivElement>(null);
   const [state, setState] = useState<IState>({ ...initialState.state });
 
@@ -91,7 +92,7 @@ const Room = ({ children }: IProps) => {
     const peers: any = {};
 
     const socket = io(import.meta.env.VITE_SOCKET_API, {
-      query: { username: "myusername_value" },
+      query: { name: user.name, video: true },
     });
 
     setState((prev) => ({
@@ -106,9 +107,8 @@ const Room = ({ children }: IProps) => {
     }
 
     function callOtherUsers(otherUsers: string[]) {
-      console.log("otherUsers", otherUsers);
       otherUsers.forEach(({ id: userIdToCall, data }: any) => {
-        const peer = createPeer(userIdToCall);
+        const peer = createPeer(userIdToCall, data);
         peers[userIdToCall] = { peer, data };
         localStream!.getTracks().forEach((track: any) => {
           peer.addTrack(track, localStream!);
@@ -116,7 +116,7 @@ const Room = ({ children }: IProps) => {
       });
     }
 
-    function createPeer(userIdToCall: string) {
+    function createPeer(userIdToCall: string, data: any) {
       const peer = new RTCPeerConnection(configuration);
       peer.onnegotiationneeded = () =>
         userIdToCall ? handleNegotiationNeededEvent(peer, userIdToCall) : null;
@@ -132,22 +132,23 @@ const Room = ({ children }: IProps) => {
         video.autoplay = true;
         video.playsInline = true;
         video.className = "remote-video h-full w-full object-cover";
+        console.log("data", data);
+        if (!data.video) {
+          video.classList.add("hidden");
+        }
 
         const avatarContainer = document.createElement("div");
         avatarContainer.id = `${userIdToCall}-avatar`;
         avatarContainer.className =
-          "hidden border-2 border-primary-400 border-solid w-full h-full bg-white rounded-lg bg-slate-800 flex justify-center items-center";
+          "border-2 border-slate-700 border-solid w-full h-full rounded-lg bg-slate-800 flex justify-center items-center";
+        if (data.video) {
+          avatarContainer.classList.add("hidden");
+        }
         const avatarBody = document.createElement("div");
         avatarBody.className =
           "w-40 md:w-60 h-40 md:h-60 bg-slate-700 rounded-full flex justify-center items-center text-8xl capitalize";
-        avatarBody.innerHTML = "A";
+        avatarBody.innerHTML = data?.name?.charAt(0);
         avatarContainer.appendChild(avatarBody);
-
-        // <div className="border-2 border-primary-400 border-solid w-full h-full bg-white rounded-lg bg-slate-800 flex justify-center items-center">
-        //     <div className="w-40 md:w-60 h-40 md:h-60 bg-slate-700 rounded-full flex justify-center items-center text-8xl capitalize">
-        //       {user.name?.charAt(0)}
-        //     </div>
-        //   </div>
 
         const container = document.createElement("div");
         container.className =
@@ -186,7 +187,7 @@ const Room = ({ children }: IProps) => {
       data: any;
       sdp: RTCSessionDescription;
     }) {
-      const peer = createPeer(callerId);
+      const peer = createPeer(callerId, data);
       peers[callerId] = { peer, data };
       const desc = new RTCSessionDescription(sdp);
       await peer.setRemoteDescription(desc);
@@ -243,9 +244,21 @@ const Room = ({ children }: IProps) => {
     }
 
     function handleHideVideo(userId: any) {
-      // refVideos?.current
-      //   ?.querySelector(`#${userId}-video`)
-      //   ?.classList.add("invisible");
+      refVideos?.current
+        ?.querySelector(`#${userId + "-video"}`)
+        ?.classList.add("hidden");
+      refVideos?.current
+        ?.querySelector(`#${userId + "-avatar"}`)
+        ?.classList.remove("hidden");
+    }
+
+    function handleShowVideo(userId: any) {
+      refVideos?.current
+        ?.querySelector(`#${userId + "-video"}`)
+        ?.classList.remove("hidden");
+      refVideos?.current
+        ?.querySelector(`#${userId + "-avatar"}`)
+        ?.classList.add("hidden");
     }
 
     function handleDisconnect(userId: any) {
@@ -257,11 +270,6 @@ const Room = ({ children }: IProps) => {
     }
 
     socket.on("connect", async () => {
-      //@ts-ignore
-      socket.data = {
-        username: uuidv4(),
-      };
-
       socket.emit("room:join", roomId);
 
       socket.on("room:all-other-users", callOtherUsers);
@@ -269,6 +277,7 @@ const Room = ({ children }: IProps) => {
       socket.on("peer:answer", handleAnswer);
       socket.on("peer:ice-candidate", handleReceiveIce);
       socket.on("peer:hide-video", handleHideVideo);
+      socket.on("peer:show-video", handleShowVideo);
       socket.on("peer:leave", handleDisconnect);
     });
 
@@ -301,7 +310,7 @@ const Room = ({ children }: IProps) => {
       }));
 
       state.socket?.emit(
-        !track?.enabled ? "peer:hide-video" : "user:show-video",
+        !track?.enabled ? "peer:hide-video" : "peer:show-video",
         { id: state.socket.id, roomId }
       );
     },
