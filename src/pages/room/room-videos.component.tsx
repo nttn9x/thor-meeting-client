@@ -2,8 +2,14 @@ import { useEffect, useRef } from "react";
 
 import { useRoomContext } from "./room.context";
 import { useAppSelector } from "@thor/store";
+import clsx from "clsx";
 
-const VideoPlayer: React.FC<{ stream?: MediaStream }> = ({ stream }) => {
+interface IVideoPlayerProps {
+  stream?: MediaStream;
+  show: boolean;
+}
+
+const VideoPlayer = ({ stream, show }: IVideoPlayerProps) => {
   const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
@@ -11,15 +17,15 @@ const VideoPlayer: React.FC<{ stream?: MediaStream }> = ({ stream }) => {
   }, [stream]);
 
   return (
-    <div className="overflow-hidden w-full h-full rounded-lg">
-      <video
-        className="h-full w-full object-cover"
-        data-testid="peer-video"
-        ref={videoRef}
-        autoPlay
-        muted
-      />
-    </div>
+    <video
+      className={clsx("h-full w-full object-cover", {
+        ["hidden"]: !show,
+      })}
+      data-testid="peer-video"
+      ref={videoRef}
+      autoPlay
+      muted
+    />
   );
 };
 
@@ -36,14 +42,21 @@ export default function RoomVideos() {
         ref={refVideos!}
         className="grid grid-flow-row w-full h-full px-8 pt-8 gap-8 grid-cols-1 grid-rows-1"
       >
-        {device.video && <VideoPlayer stream={localStream} />}
-        {!device.video && (
-          <div className="border-2 border-primary-400 border-solid w-full h-full rounded-lg bg-slate-800 flex justify-center items-center">
+        <div className="overflow-hidden w-full h-full rounded-lg">
+          <VideoPlayer show={Boolean(device.video)} stream={localStream} />
+          <div
+            className={clsx(
+              "border-2 border-primary-400 border-solid w-full h-full rounded-lg bg-slate-800 flex justify-center items-center",
+              {
+                ["hidden"]: device.video,
+              }
+            )}
+          >
             <div className="w-40 md:w-60 h-40 md:h-60 bg-slate-700 rounded-full flex justify-center items-center text-6xl md:text-8xl capitalize">
               {user.name?.charAt(0)}
             </div>
           </div>
-        )}
+        </div>
       </div>
     </div>
   );

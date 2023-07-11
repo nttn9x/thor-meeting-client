@@ -9,6 +9,7 @@ import {
 } from "react";
 import { useParams } from "react-router-dom";
 import { Socket, io } from "socket.io-client";
+import { configuration, getGridTemplate, getLocalStream } from "./room.util";
 
 interface IProps {
   children: React.ReactNode;
@@ -44,33 +45,6 @@ const initialState = {
 
 export const RoomContext = createContext<IRoomContext>(initialState);
 
-const configuration = {
-  iceServers: [{ urls: "stun:stun.l.google.com:19302" }],
-};
-
-async function getLocalStream(
-  constraints = {
-    audio: true,
-    video: true,
-  }
-) {
-  return await navigator.mediaDevices.getUserMedia(constraints);
-}
-
-function getGridTemplate(count: number) {
-  switch (count) {
-    case 1:
-      return "grid-cols-1 grid-rows-1";
-    case 2:
-      return "grid-cols-1 grid-rows-2 md:grid-cols-2 md:grid-rows-1";
-    case 3:
-    case 4:
-      return "grid-cols-2 grid-rows-2";
-    default:
-      return "grid-cols-2 md:grid-cols-4 grid-rows-3";
-  }
-}
-
 const Room = ({ children }: IProps) => {
   const { roomId } = useParams();
   const user = useAppSelector((state) => state.user);
@@ -92,7 +66,7 @@ const Room = ({ children }: IProps) => {
     const peers: any = {};
 
     const socket = io(import.meta.env.VITE_SOCKET_API, {
-      query: { name: user.name, video: true },
+      query: { name: user.name, video: "asd asd as da" },
     });
 
     setState((prev) => ({
@@ -133,7 +107,7 @@ const Room = ({ children }: IProps) => {
         video.playsInline = true;
         video.className = "remote-video h-full w-full object-cover";
         console.log("data", data);
-        if (!data.video) {
+        if (!Boolean(data.video)) {
           video.classList.add("hidden");
         }
 
@@ -141,7 +115,7 @@ const Room = ({ children }: IProps) => {
         avatarContainer.id = `${userIdToCall}-avatar`;
         avatarContainer.className =
           "border-2 border-slate-700 border-solid w-full h-full rounded-lg bg-slate-800 flex justify-center items-center";
-        if (data.video) {
+        if (Boolean(data.video)) {
           avatarContainer.classList.add("hidden");
         }
         const avatarBody = document.createElement("div");
