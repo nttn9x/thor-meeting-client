@@ -1,21 +1,22 @@
-import { useNavigate } from "react-router-dom";
+import Badge from "@thor/system-ui/badge";
 
-import { Mic, MicOff, PhoneOff, Video, VideoOff } from "react-feather";
+import { Users, Share2 } from "react-feather";
 
-import { AppRouters } from "@thor/constants";
-import Button from "@thor/system-ui/button";
-import clsx from "clsx";
 import { useRoomContext } from "./room.context";
+import RoomMediaActions from "./room-actions-media.component";
+import Icon from "@thor/system-ui/icon";
 
 export default function RoomActions() {
-  const navigate = useNavigate();
   const {
-    toggleMedia,
-    state: { localStream, device },
+    state: { localStream },
   } = useRoomContext();
 
-  const join = () => {
-    navigate(AppRouters.Lobby, { replace: true });
+  const copy = async () => {
+    try {
+      await navigator.clipboard.writeText(window.location.href);
+
+      alert("Copied");
+    } catch (err) {}
   };
 
   if (!localStream) {
@@ -23,39 +24,15 @@ export default function RoomActions() {
   }
 
   return (
-    <div className="flex-initial py-6 flex items-center justify-center gap-3">
-      <Button
-        onClick={() => toggleMedia?.("video")}
-        className={clsx(
-          "rounded-full h-12 w-12 px-0 flex justify-center items-center text-primary-500",
-          {
-            ["bg-slate-200"]: device.video,
-            ["bg-slate-600"]: !device.video,
-          }
-        )}
-      >
-        {device.video ? <Video /> : <VideoOff />}
-      </Button>
-      <Button
-        variant="primary"
-        className="rounded-full h-14 w-14 bg-red-600"
-        onClick={join}
-      >
-        <PhoneOff />
-      </Button>
-
-      <Button
-        onClick={() => toggleMedia?.("audio")}
-        className={clsx(
-          "rounded-full h-12 w-12 px-0 flex justify-center items-center text-primary-500",
-          {
-            ["bg-slate-200"]: device.audio,
-            ["bg-slate-600"]: !device.audio,
-          }
-        )}
-      >
-        {device.audio ? <Mic /> : <MicOff />}
-      </Button>
+    <div className="flex-initial p-6">
+      <div className="flex flex-row">
+        <div className="basis-1/6"></div>
+        <RoomMediaActions />
+        <div className="basis-1/6 flex items-center justify-end gap-3">
+          <Icon onClick={copy} icon={<Share2 className="w-5 h-5 m-auto" />} />
+          <Badge icon={<Users className="w-5 h-5 m-auto" />} />
+        </div>
+      </div>
     </div>
   );
 }
