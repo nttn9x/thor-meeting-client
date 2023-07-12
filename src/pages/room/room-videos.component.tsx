@@ -1,8 +1,10 @@
 import { useEffect, useRef } from "react";
+import { useAppSelector } from "@thor/store";
+import { getRandomColor } from "@thor/utils/color.util";
+
+import clsx from "clsx";
 
 import { useRoomContext } from "./room.context";
-import { useAppSelector } from "@thor/store";
-import clsx from "clsx";
 
 interface IVideoPlayerProps {
   stream?: MediaStream;
@@ -46,14 +48,20 @@ export default function RoomVideos() {
           <VideoPlayer show={Boolean(device.video)} stream={localStream} />
           <div
             className={clsx(
-              "border-2 border-primary-400 border-solid w-full h-full rounded-lg bg-slate-800 flex justify-center items-center",
+              "relative border-2 border-primary-400 border-solid w-full h-full rounded-lg bg-slate-800 flex justify-center items-center",
               {
                 ["hidden"]: device.video,
               }
             )}
           >
-            <div className="w-40 md:w-60 h-40 md:h-60 bg-slate-700 rounded-full flex justify-center items-center text-6xl md:text-8xl capitalize">
+            <div
+              style={{ color: getRandomColor() }}
+              className="w-40 md:w-60 h-40 md:h-60 bg-slate-700 rounded-full flex justify-center items-center text-6xl md:text-8xl capitalize"
+            >
               {user.name?.charAt(0)}
+            </div>
+            <div className="px-4 rounded-bl-lg bg-slate-950/25  absolute bottom-0 left-0 h-8 flex items-center">
+              {user.name}
             </div>
           </div>
         </div>

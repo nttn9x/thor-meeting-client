@@ -9,6 +9,7 @@ import {
 } from "react";
 import { useParams } from "react-router-dom";
 import { Socket, io } from "socket.io-client";
+import { getRandomColor } from "@thor/utils/color.util";
 import { configuration, getGridTemplate, getLocalStream } from "./room.util";
 
 interface IProps {
@@ -122,11 +123,18 @@ const Room = ({ children }: IProps) => {
         avatarBody.className =
           "w-40 md:w-60 h-40 md:h-60 bg-slate-700 rounded-full flex justify-center items-center text-8xl capitalize";
         avatarBody.innerHTML = data?.name?.charAt(0);
+        avatarBody.style.color = getRandomColor();
+        const avatarName = document.createElement("div");
+        avatarName.className =
+          "px-4 rounded-bl-lg bg-slate-950/25  absolute bottom-0 left-0 h-8 flex items-center";
+        avatarName.innerHTML = data?.name;
+
         avatarContainer.appendChild(avatarBody);
+        avatarContainer.appendChild(avatarName);
 
         const container = document.createElement("div");
         container.className =
-          "remote-video-container rounded-lg overflow-hidden h-full w-full";
+          "relative remote-video-container rounded-lg overflow-hidden h-full w-full";
         container.appendChild(video);
         container.appendChild(avatarContainer);
         container.id = userIdToCall;
