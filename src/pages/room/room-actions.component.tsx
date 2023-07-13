@@ -26,9 +26,9 @@ export default function RoomActions() {
   return (
     <div className="flex-initial p-6">
       <div className="flex flex-row">
-        <div className="basis-1/6"></div>
+        <div className="hidden md:block basis-1/6"></div>
         <RoomMediaActions />
-        <div className="basis-1/6 flex items-center justify-end gap-3">
+        <div className="basis-1/6 flex items-center justify-end gap-0 md:gap-3">
           <Icon onClick={copy} icon={<Share2 className="w-5 h-5 m-auto" />} />
           <Badge icon={<Users className="w-5 h-5 m-auto" />} />
         </div>

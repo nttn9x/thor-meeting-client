@@ -121,12 +121,12 @@ const Room = ({ children }: IProps) => {
         }
         const avatarBody = document.createElement("div");
         avatarBody.className =
-          "w-40 md:w-60 h-40 md:h-60 bg-slate-700 rounded-full flex justify-center items-center text-8xl capitalize";
+          "w-20 md:w-60 h-20 md:h-60 bg-slate-700 rounded-full flex justify-center items-center text-4xl md:text-8xl capitalize";
         avatarBody.innerHTML = data?.name?.charAt(0);
         avatarBody.style.color = getRandomColor();
         const avatarName = document.createElement("div");
         avatarName.className =
-          "px-4 rounded-bl-lg bg-slate-950/25  absolute bottom-0 left-0 h-8 flex items-center";
+          "text-primary-100 px-4 rounded-bl-lg bg-slate-950/25  absolute bottom-0 left-0 h-8 flex items-center";
         avatarName.innerHTML = data?.name;
 
         avatarContainer.appendChild(avatarBody);
@@ -291,10 +291,12 @@ const Room = ({ children }: IProps) => {
         },
       }));
 
-      state.socket?.emit(
-        !track?.enabled ? "peer:hide-video" : "peer:show-video",
-        { id: state.socket.id, roomId }
-      );
+      if (type === "video") {
+        state.socket?.emit(
+          !track?.enabled ? "peer:hide-video" : "peer:show-video",
+          { id: state.socket.id, roomId }
+        );
+      }
     },
     [state.localStream, setState, state.socket, roomId]
   );

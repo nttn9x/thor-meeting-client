@@ -19,11 +19,11 @@ export default function RoomMediaActions() {
   };
 
   return (
-    <div className="basis-4/6 flex items-center justify-center gap-4">
+    <div className="basis-5/6 md:basis-4/6 flex items-center justify-start md:justify-center gap-2 md:gap-4">
       <Button
         onClick={() => toggleMedia?.("video")}
         className={clsx(
-          "rounded-full h-12 w-12 px-0 flex justify-center items-center",
+          "rounded-full w-11 md:w-12 h-11 md:h-12 px-0 flex justify-center items-center",
           {
             ["bg-slate-600 text-primary-300"]: device.video,
             ["bg-slate-300 text-primary-700"]: !device.video,
@@ -40,7 +40,7 @@ export default function RoomMediaActions() {
       <Button
         onClick={() => toggleMedia?.("audio")}
         className={clsx(
-          "rounded-full h-12 w-12 px-0 flex justify-center items-center",
+          "rounded-full w-11 md:w-12 h-11 md:h-12 px-0 flex justify-center items-center",
           {
             ["bg-slate-600 text-primary-300"]: device.audio,
             ["bg-slate-300 text-primary-700"]: !device.audio,
@@ -56,18 +56,18 @@ export default function RoomMediaActions() {
 
       <Button
         className={clsx(
-          "rounded-full h-12 w-12 px-0 flex justify-center items-center",
+          "rounded-full w-11 md:w-12 h-11 md:h-12 px-0 flex justify-center items-center",
           {
             ["bg-slate-600 text-primary-300"]: true,
           }
         )}
       >
-        <Airplay />
+        <Airplay className="w-5 h-5 m-auto" />
       </Button>
 
       <Button
         variant="primary"
-        className="rounded-full h-12 w-12 bg-red-600"
+        className="bg-red-600 rounded-full w-11 md:w-12 h-11 md:h-12 px-0 flex justify-center items-center"
         onClick={cancel}
       >
         <PhoneOff className="w-5 h-5 m-auto" />

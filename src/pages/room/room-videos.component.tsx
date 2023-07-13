@@ -59,11 +59,11 @@ export default function RoomVideos() {
           >
             <div
               style={{ color: getRandomColor() }}
-              className="w-40 md:w-60 h-40 md:h-60 bg-slate-700 rounded-full flex justify-center items-center text-6xl md:text-8xl capitalize"
+              className="w-20 md:w-60 h-20 md:h-60 bg-slate-700 rounded-full flex justify-center items-center text-4xl md:text-8xl capitalize"
             >
               {user.name?.charAt(0)}
             </div>
-            <div className="px-4 rounded-bl-lg bg-slate-950/25  absolute bottom-0 left-0 h-8 flex items-center">
+            <div className="text-primary-100 px-4 rounded-bl-lg bg-slate-950/25  absolute bottom-0 left-0 h-8 flex items-center">
               {user.name}
             </div>
           </div>
