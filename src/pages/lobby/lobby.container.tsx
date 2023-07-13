@@ -6,7 +6,7 @@ const DashBoard = () => {
       <div className="flex p-8 md:p-16 gap-2">
         <span className="font-semibold">Thor</span>Meeting
       </div>
-      <div className="flex p-8 md:p-16">
+      <div className="flex p-8 md:p-16 flex-col md:flex-row">
         <div className="flex-1">
           <div className="flex flex-col gap-4">
             <div className="flex-1 text-3xl md:text-5xl leading-tight">

@@ -107,7 +107,7 @@ const Room = ({ children }: IProps) => {
         video.autoplay = true;
         video.playsInline = true;
         video.className = "remote-video h-full w-full object-cover";
-        console.log("data", data);
+
         if (!Boolean(data.video)) {
           video.classList.add("hidden");
         }

@@ -16,7 +16,7 @@ export default function Button({
   return (
     <button
       disabled={disabled}
-      className={clsx("rounded px-4 py-2", className, {
+      className={clsx("rounded px-4 py-2 text-white", className, {
         "!bg-gray-500 disabled:opacity-75": disabled,
         "bg-primary-500": variant === "primary",
       })}

@@ -38,7 +38,7 @@ const DashBoardActions = () => {
         }
       />
       <Button
-        className={clsx("text-primary-500 hover:bg-slate-800", {
+        className={clsx("!text-primary-500 hover:bg-slate-800", {
           "invisible peer-focus:visible": !code,
         })}
         onClick={joinRoom}
