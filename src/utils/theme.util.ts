@@ -3,10 +3,10 @@ export enum ThemMode {
   Light = "light",
 }
 
-export const getMode = () => {
+export const getThemeMode = () => {
   return localStorage.getItem("theme_mode") || ThemMode.Dark;
 };
 
-export const setMode = (value: string) => {
+export const setThemeMode = (value: string) => {
   return localStorage.setItem("theme_mode", value);
 };

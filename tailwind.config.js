@@ -5,13 +5,14 @@ export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     colors: {
-      primary: colors.indigo,
+      primary: colors.orange,
       slate: colors.slate,
       red: colors.red,
       gray: colors.gray,
+      stone: colors.stone,
       white: colors.white,
     },
   },
-  plugins: [],
+  plugins: [require("@tailwindcss/typography")],
   darkMode: "class",
 };

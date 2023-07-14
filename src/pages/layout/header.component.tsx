@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import { Sun, Moon } from "react-feather";
-import { ThemMode, getMode, setMode } from "@thor/utils/theme.util";
+import { ThemMode, getThemeMode, setThemeMode } from "@thor/utils/theme.util";
 
 export default function LayoutHeader() {
-  const [mode, _setMode] = useState<string>(getMode());
+  const [mode, setMode] = useState<string>(getThemeMode());
 
   useEffect(() => {
     document.documentElement.className = mode;
@@ -12,13 +12,13 @@ export default function LayoutHeader() {
   const changeMode = () => {
     const value = mode === ThemMode.Dark ? ThemMode.Light : ThemMode.Dark;
 
-    _setMode(value);
-
     setMode(value);
+
+    setThemeMode(value);
   };
 
   return (
-    <header className="w-full p-4 flex justify-end">
+    <header className="fixed top-0 w-full p-4 flex justify-end">
       <button onClick={changeMode}>
         {mode === ThemMode.Dark ? <Moon /> : <Sun />}
       </button>

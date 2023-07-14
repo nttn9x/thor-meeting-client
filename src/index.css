@@ -10,12 +10,8 @@ body,
   height: 100%;
 }
 
+
+
 html.dark>body {
   color: rgb(255, 255, 255);
-}
-
-.bg {
-  z-index: -1;
-  opacity: 0.1;
-  background-image: url("./assets/images/brick-wall.png");
 }

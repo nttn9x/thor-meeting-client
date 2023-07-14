@@ -16,7 +16,7 @@ export default function Input({ className, onEnter, ...rest }: IInput) {
   return (
     <input
       className={clsx(
-        "border-slate-300 focus:border-primary-400 outline-none border-x border-y w-full px-4 py-2 text-slate-400 rounded-md dark:bg-slate-800 dark:hover:bg-slate-700",
+        "border-slate-300 focus:border-primary-500 outline-none border-x border-y w-full px-4 py-2 rounded-md dark:bg-slate-800 dark:hover:bg-slate-700",
         className
       )}
       placeholder="you@example.com"

@@ -4,6 +4,8 @@ const en = {
     join: "Join",
     enter_your_name: "Enter your name",
     new_meeting: "New Meeting",
+    let_s_talk: "Let's talk",
+    back: "Back",
   },
 };
 

@@ -51,7 +51,7 @@ export default function RoomVideos() {
           <VideoPlayer show={Boolean(device.video)} stream={localStream} />
           <div
             className={clsx(
-              "relative border-2 border-primary-400 border-solid w-full h-full rounded-lg bg-slate-800 flex justify-center items-center",
+              "relative border-x border-y border-primary-500 border-solid w-full h-full rounded-lg dark:bg-stone-900 bg-stone-200 flex justify-center items-center",
               {
                 ["hidden"]: device.video,
               }
@@ -59,11 +59,11 @@ export default function RoomVideos() {
           >
             <div
               style={{ color: getRandomColor() }}
-              className="w-20 md:w-60 h-20 md:h-60 bg-slate-700 rounded-full flex justify-center items-center text-4xl md:text-8xl capitalize"
+              className="w-20 md:w-60 h-20 md:h-60 bg-stone-300 dark:bg-stone-700 rounded-full flex justify-center items-center text-4xl md:text-8xl capitalize"
             >
               {user.name?.charAt(0)}
             </div>
-            <div className="text-primary-100 px-4 rounded-bl-lg bg-slate-950/25  absolute bottom-0 left-0 h-8 flex items-center">
+            <div className="px-4 rounded-bl-lg bg-slate-950/10 absolute bottom-0 left-0 h-8 flex items-center">
               {user.name}
             </div>
           </div>

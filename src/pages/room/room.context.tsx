@@ -115,18 +115,18 @@ const Room = ({ children }: IProps) => {
         const avatarContainer = document.createElement("div");
         avatarContainer.id = `${userIdToCall}-avatar`;
         avatarContainer.className =
-          "border-2 border-slate-700 border-solid w-full h-full rounded-lg bg-slate-800 flex justify-center items-center";
+          "border-x border-y border-slate-700 border-solid w-full h-full rounded-lg dark:bg-stone-900 bg-stone-200 flex justify-center items-center";
         if (Boolean(data.video)) {
           avatarContainer.classList.add("hidden");
         }
         const avatarBody = document.createElement("div");
         avatarBody.className =
-          "w-20 md:w-60 h-20 md:h-60 bg-slate-700 rounded-full flex justify-center items-center text-4xl md:text-8xl capitalize";
+          "w-20 md:w-60 h-20 md:h-60 bg-stone-300 dark:bg-stone-700 rounded-full flex justify-center items-center text-4xl md:text-8xl capitalize";
         avatarBody.innerHTML = data?.name?.charAt(0);
         avatarBody.style.color = getRandomColor();
         const avatarName = document.createElement("div");
         avatarName.className =
-          "text-primary-100 px-4 rounded-bl-lg bg-slate-950/25  absolute bottom-0 left-0 h-8 flex items-center";
+          "px-4 rounded-bl-lg bg-slate-950/15  absolute bottom-0 left-0 h-8 flex items-center";
         avatarName.innerHTML = data?.name;
 
         avatarContainer.appendChild(avatarBody);

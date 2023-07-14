@@ -1,25 +1,27 @@
+import clsx from "clsx";
 import React from "react";
 
 interface IButton extends React.HTMLAttributes<HTMLButtonElement> {
   variant?: "primary";
   disabled?: boolean;
-  icon?: React.ReactNode;
 }
 
-export default function Icon({
+export default function Link({
   className,
   children,
   variant,
   disabled,
-  icon,
   ...rest
 }: IButton) {
   return (
     <button
-      className="h-12 w-12 hover:bg-slate-300 hover:text-primary-700 text-primary-500 rounded-full py-4 px-1 relative hover:text-primary-600"
+      disabled={disabled}
+      className={clsx("rounded px-4 py-2", className, {
+        "text-primary-500": variant === "primary",
+      })}
       {...rest}
     >
-      {icon}
+      {children}
     </button>
   );
 }

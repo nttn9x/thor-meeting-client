@@ -16,7 +16,7 @@ export default function Badge({
 }: IButton) {
   return (
     <button
-      className="h-12 w-12 hover:bg-slate-300 hover:text-primary-700 text-primary-300 rounded-full py-4 px-1 relative hover:text-primary-600"
+      className="h-12 w-12 hover:bg-slate-300 hover:text-primary-700 text-primary-500 rounded-full py-4 px-1 relative hover:text-primary-600"
       {...rest}
     >
       {icon}

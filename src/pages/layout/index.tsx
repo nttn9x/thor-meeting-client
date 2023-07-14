@@ -5,8 +5,7 @@ const Layout = () => {
   return (
     <>
       <LayoutHeader />
-      <main className="h-full w-full">
-        <div className="bg fixed top-0 left-0 w-full h-full"></div>
+      <main className="h-full w-full pt-14">
         <Outlet />
       </main>
     </>
