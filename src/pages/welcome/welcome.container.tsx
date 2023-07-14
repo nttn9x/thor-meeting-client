@@ -34,7 +34,6 @@ const DashBoard = () => {
       return;
     }
 
-    console.log(" { ...state }", { ...state });
     dispatch(setUser({ user: { ...state } }));
   };
 
@@ -44,7 +43,6 @@ const DashBoard = () => {
 
   const onSettingsChange = (name: string, value: Boolean) => {
     setState((prev: any) => {
-      console.log("a", { ...prev, [name]: value });
       return { ...prev, [name]: value };
     });
   };

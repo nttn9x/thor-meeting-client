@@ -52,7 +52,7 @@ export const RoomContext = createContext<IRoomContext>(initialState);
 
 const Room = ({ children }: IProps) => {
   const { roomId } = useParams();
-  const user = useAppSelector((state) => state.user);
+  const user: any = useAppSelector((state) => state.user);
   const refVideos = useRef<HTMLDivElement>(null);
   const [state, setState] = useState<IState>({
     device: {
@@ -62,10 +62,11 @@ const Room = ({ children }: IProps) => {
   });
 
   useEffect(() => {
-    getLocalStream({
-      audio: true,
-      video: Boolean(user.video),
-    }).then((localStream: MediaStream) => {
+    getLocalStream().then((localStream: MediaStream) => {
+      localStream!.getTracks().find((track) => {
+        track.enabled = Boolean(user[track.kind]);
+      });
+
       setState((prev) => ({ ...prev, localStream }));
     });
   }, [setState, user]);
