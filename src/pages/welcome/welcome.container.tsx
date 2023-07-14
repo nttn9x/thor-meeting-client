@@ -11,6 +11,7 @@ import Input from "@thor/system-ui/input";
 import clsx from "clsx";
 import Link from "@thor/system-ui/link";
 import { AppRouters } from "@thor/constants";
+import Switch from "@thor/system-ui/switch";
 
 const DashBoard = () => {
   const dispatch = useAppDispatch();
@@ -18,21 +19,34 @@ const DashBoard = () => {
   const navigate = useNavigate();
   const user = useAppSelector((state) => state.user);
   const { t } = useTranslation();
-  const [name, setName] = useState<string>("");
+  const [state, setState] = useState<any>({
+    name: "",
+    video: true,
+    audio: true,
+  });
 
   const onNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setName(e.target.value);
+    setState((prev: any) => ({ ...prev, name: e.target.value }));
   };
 
   const join = () => {
-    if (!name) {
+    if (!state.name) {
       return;
     }
-    dispatch(setUser({ user: { name } }));
+
+    console.log(" { ...state }", { ...state });
+    dispatch(setUser({ user: { ...state } }));
   };
 
   const goBack = () => {
     navigate(AppRouters.Lobby);
+  };
+
+  const onSettingsChange = (name: string, value: Boolean) => {
+    setState((prev: any) => {
+      console.log("a", { ...prev, [name]: value });
+      return { ...prev, [name]: value };
+    });
   };
 
   if (!_isEmpty(user)) {
@@ -54,15 +68,39 @@ const DashBoard = () => {
         </Link>
         <Input
           autoFocus
-          value={name}
+          value={state.name}
           placeholder={t("enter_your_name")}
           onChange={onNameChange}
           onEnter={join}
         />
+        <div className="flex flex-col gap-3">
+          <div className="flex gap-3">
+            <Switch
+              id="video"
+              name="video"
+              onChange={onSettingsChange}
+              value={state.video}
+            />
+            <label className="cursor-pointer" htmlFor="video">
+              {t("video")}
+            </label>
+          </div>
+          <div className="flex gap-3">
+            <Switch
+              id="audio"
+              name="audio"
+              onChange={onSettingsChange}
+              value={state.audio}
+            />
+            <label className="cursor-pointer" htmlFor="audio">
+              {t("audio")}
+            </label>
+          </div>
+        </div>
         <Button
           variant="primary"
           className={clsx("w-full", {
-            invisible: !name,
+            invisible: !state.name,
             visible: name,
           })}
           onClick={join}

@@ -35,6 +35,10 @@ interface IRoomContext {
   refVideos?: React.RefObject<HTMLDivElement>;
 }
 
+const isTrueSet = (value: string) => {
+  return /^true$/i.test(value);
+};
+
 const initialState = {
   state: {
     device: {
@@ -50,13 +54,21 @@ const Room = ({ children }: IProps) => {
   const { roomId } = useParams();
   const user = useAppSelector((state) => state.user);
   const refVideos = useRef<HTMLDivElement>(null);
-  const [state, setState] = useState<IState>({ ...initialState.state });
+  const [state, setState] = useState<IState>({
+    device: {
+      video: Boolean(user.video),
+      audio: Boolean(user.audio),
+    },
+  });
 
   useEffect(() => {
-    getLocalStream().then((localStream: MediaStream) => {
+    getLocalStream({
+      audio: true,
+      video: Boolean(user.video),
+    }).then((localStream: MediaStream) => {
       setState((prev) => ({ ...prev, localStream }));
     });
-  }, [setState]);
+  }, [setState, user]);
 
   useEffect(() => {
     const localStream = state.localStream;
@@ -67,7 +79,7 @@ const Room = ({ children }: IProps) => {
     const peers: any = {};
 
     const socket = io(import.meta.env.VITE_SOCKET_API, {
-      query: { name: user.name, video: "asd asd as da" },
+      query: { ...user },
     });
 
     setState((prev) => ({
@@ -84,6 +96,7 @@ const Room = ({ children }: IProps) => {
     function callOtherUsers(otherUsers: string[]) {
       otherUsers.forEach(({ id: userIdToCall, data }: any) => {
         const peer = createPeer(userIdToCall, data);
+
         peers[userIdToCall] = { peer, data };
         localStream!.getTracks().forEach((track: any) => {
           peer.addTrack(track, localStream!);
@@ -107,8 +120,7 @@ const Room = ({ children }: IProps) => {
         video.autoplay = true;
         video.playsInline = true;
         video.className = "remote-video h-full w-full object-cover";
-
-        if (!Boolean(data.video)) {
+        if (!isTrueSet(data.video)) {
           video.classList.add("hidden");
         }
 
@@ -116,7 +128,7 @@ const Room = ({ children }: IProps) => {
         avatarContainer.id = `${userIdToCall}-avatar`;
         avatarContainer.className =
           "border-x border-y border-slate-700 border-solid w-full h-full rounded-lg dark:bg-stone-900 bg-stone-200 flex justify-center items-center";
-        if (Boolean(data.video)) {
+        if (isTrueSet(data.video)) {
           avatarContainer.classList.add("hidden");
         }
         const avatarBody = document.createElement("div");

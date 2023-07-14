@@ -6,6 +6,8 @@ const en = {
     new_meeting: "New Meeting",
     let_s_talk: "Let's talk",
     back: "Back",
+    audio: "Audio",
+    video: "Video",
   },
 };
 
