@@ -25,8 +25,8 @@ export default function RoomMediaActions() {
         className={clsx(
           "rounded-full w-11 md:w-12 h-11 md:h-12 px-0 flex justify-center items-center",
           {
-            ["bg-slate-600 text-primary-300"]: device.video,
-            ["bg-slate-300 text-primary-700"]: !device.video,
+            ["bg-stone-400 text-primary-300"]: device.video,
+            ["bg-stone-700 text-primary-700"]: !device.video,
           }
         )}
       >
@@ -42,8 +42,8 @@ export default function RoomMediaActions() {
         className={clsx(
           "rounded-full w-11 md:w-12 h-11 md:h-12 px-0 flex justify-center items-center",
           {
-            ["bg-slate-600 text-primary-300"]: device.audio,
-            ["bg-slate-300 text-primary-700"]: !device.audio,
+            ["bg-stone-400 text-primary-300"]: device.audio,
+            ["bg-stone-700 text-primary-700"]: !device.audio,
           }
         )}
       >
@@ -58,7 +58,7 @@ export default function RoomMediaActions() {
         className={clsx(
           "rounded-full w-11 md:w-12 h-11 md:h-12 px-0 flex justify-center items-center",
           {
-            ["bg-slate-600 text-primary-300"]: true,
+            ["bg-stone-400 text-primary-300"]: true,
           }
         )}
       >

@@ -38,6 +38,7 @@ const DashBoardActions = () => {
         onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
           setCode(e.target.value)
         }
+        onEnter={joinRoom}
       />
       <Button
         className={clsx(
