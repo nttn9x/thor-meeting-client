@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import clsx from "clsx";
+import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 
 import Button from "@thor/system-ui/button";
@@ -8,6 +9,7 @@ import Input from "@thor/system-ui/input";
 
 const DashBoardActions = () => {
   const navigate = useNavigate();
+  const { t } = useTranslation();
   const [code, setCode] = useState<string>();
 
   const onCreateMeeting = () => {
@@ -24,7 +26,7 @@ const DashBoardActions = () => {
   return (
     <div className="mt-10 flex flex-wrap gap-6">
       <Button onClick={onCreateMeeting} variant="primary">
-        New Meeting
+        {t("new_meeting")}
       </Button>
 
       <Input
@@ -43,7 +45,7 @@ const DashBoardActions = () => {
         })}
         onClick={joinRoom}
       >
-        Join
+        {t("join")}
       </Button>
     </div>
   );

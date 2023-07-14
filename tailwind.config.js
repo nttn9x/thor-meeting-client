@@ -11,7 +11,7 @@ export default {
       gray: colors.gray,
       white: colors.white,
     },
-    extend: {},
   },
   plugins: [],
+  darkMode: "class",
 };

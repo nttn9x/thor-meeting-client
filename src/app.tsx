@@ -1,20 +1,10 @@
-import { BrowserRouter, Route, Routes, Outlet } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 
-import Welcome from "./pages/welcome";
+import { Suspense } from "react";
 import Lobby from "./pages/lobby";
 import Room from "./pages/room";
-import { Suspense } from "react";
-
-const Layout = () => {
-  return (
-    <>
-      <main className="h-full w-full">
-        <div className="bg fixed top-0 left-0 w-full h-full"></div>
-        <Outlet />
-      </main>
-    </>
-  );
-};
+import Welcome from "./pages/welcome";
+import Layout from "./pages/layout";
 
 const App = () => {
   return (

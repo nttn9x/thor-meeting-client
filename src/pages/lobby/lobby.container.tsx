@@ -1,4 +1,5 @@
 import Actions from "./lobby-actions.component";
+import LobbyBanner from "./lobby-banner.component";
 
 const DashBoard = () => {
   return (
@@ -8,15 +9,7 @@ const DashBoard = () => {
       </div>
       <div className="flex p-8 md:p-16 flex-col md:flex-row">
         <div className="flex-1">
-          <div className="flex flex-col gap-4">
-            <div className="flex-1 text-3xl md:text-5xl leading-tight">
-              Premium video meetings. Now free for everyone.
-            </div>
-            <div>
-              We re-engineered the service we built for secure business
-              meetings, Thor Meet, to make it free and available for all.
-            </div>
-          </div>
+          <LobbyBanner />
           <Actions />
         </div>
         <div className="flex-1"></div>
