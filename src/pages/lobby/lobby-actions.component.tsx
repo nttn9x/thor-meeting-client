@@ -13,14 +13,14 @@ const DashBoardActions = () => {
   const [code, setCode] = useState<string>();
 
   const onCreateMeeting = () => {
-    navigate(`/room/${uuidv4()}`);
+    navigate(`/name/${uuidv4()}`);
   };
 
   const joinRoom = () => {
     if (!code) {
       return;
     }
-    navigate(`/room/${code}`);
+    navigate(`/name/${code}`);
   };
 
   return (
