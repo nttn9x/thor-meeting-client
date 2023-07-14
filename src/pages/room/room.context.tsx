@@ -127,7 +127,7 @@ const Room = ({ children }: IProps) => {
         const avatarContainer = document.createElement("div");
         avatarContainer.id = `${userIdToCall}-avatar`;
         avatarContainer.className =
-          "border-x border-y border-slate-700 border-solid w-full h-full rounded-lg dark:bg-stone-900 bg-stone-200 flex justify-center items-center";
+          "border-x border-y border-stone-400 dark:border-stone-600 border-solid w-full h-full rounded-lg dark:bg-stone-900 bg-stone-200 flex justify-center items-center";
         if (isTrueSet(data.video)) {
           avatarContainer.classList.add("hidden");
         }
