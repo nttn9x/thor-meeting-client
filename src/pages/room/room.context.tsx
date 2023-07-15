@@ -9,8 +9,10 @@ import {
 } from "react";
 import { useParams } from "react-router-dom";
 import { Socket, io } from "socket.io-client";
-import { getRandomColor } from "@thor/utils/color.util";
 import { configuration, getGridTemplate, getLocalStream } from "./room.util";
+
+import { getRandomColor } from "@thor/utils/color.util";
+import { selectUser } from "@thor/store/slices/user/user.slice";
 
 interface IProps {
   children: React.ReactNode;
@@ -52,7 +54,7 @@ export const RoomContext = createContext<IRoomContext>(initialState);
 
 const Room = ({ children }: IProps) => {
   const { roomId } = useParams();
-  const user: any = useAppSelector((state) => state.user);
+  const user: any = useAppSelector(selectUser);
   const refVideos = useRef<HTMLDivElement>(null);
   const [state, setState] = useState<IState>({
     device: {

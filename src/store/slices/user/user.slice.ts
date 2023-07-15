@@ -1,6 +1,7 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
 import { initialState, SetUserPayLoad } from "./user.contants";
+import { RootState } from "@thor/store";
 
 export const userSlice = createSlice({
   name: "user",
@@ -16,5 +17,7 @@ export const userSlice = createSlice({
 });
 
 export const { setUser } = userSlice.actions;
+
+export const selectUser = (state: RootState) => state.user;
 
 export default userSlice;

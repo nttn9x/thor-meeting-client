@@ -5,9 +5,10 @@ import { useAppSelector } from "@thor/store";
 
 import Room from "./room.container";
 import RoomContext from "./room.context";
+import { selectUser } from "@thor/store/slices/user/user.slice";
 
 const RoomContainer = () => {
-  const user = useAppSelector((state) => state.user);
+  const user = useAppSelector(selectUser);
   const { roomId } = useParams();
 
   const isEmpty = _isEmpty(user);

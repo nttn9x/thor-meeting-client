@@ -18,7 +18,10 @@ export default function LayoutHeader() {
   };
 
   return (
-    <header className="fixed top-0 w-full p-4 flex justify-end">
+    <header className="fixed top-0 w-full py-4 px-16 flex justify-between items-center">
+      <div>
+        <span className="font-semibold text-primary-500 mr-1">Thor</span>Meeting
+      </div>
       <button onClick={changeMode}>
         {mode === ThemMode.Dark ? <Moon /> : <Sun />}
       </button>

@@ -1,8 +1,9 @@
 import { useEffect, useRef } from "react";
+import clsx from "clsx";
+
 import { useAppSelector } from "@thor/store";
 import { getRandomColor } from "@thor/utils/color.util";
-
-import clsx from "clsx";
+import { selectUser } from "@thor/store/slices/user/user.slice";
 
 import { useRoomContext } from "./room.context";
 
@@ -39,7 +40,7 @@ export default function RoomVideos() {
     refVideos,
     state: { localStream, device },
   } = useRoomContext();
-  const user = useAppSelector((state) => state.user);
+  const user = useAppSelector(selectUser);
 
   return (
     <div className="flex-auto overflow-hidden">

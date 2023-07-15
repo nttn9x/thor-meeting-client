@@ -5,7 +5,7 @@ export interface IUserState {
 }
 
 export interface SetUserPayLoad {
-  user: IUserState;
+  user?: IUserState;
 }
 
 export const initialState: IUserState = {};

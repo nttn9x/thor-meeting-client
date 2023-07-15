@@ -1,11 +1,11 @@
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Navigate, useNavigate, useParams } from "react-router-dom";
-import { XCircle } from "react-feather";
+import { ArrowLeft } from "react-feather";
 import _isEmpty from "lodash/isEmpty";
 
 import { useAppDispatch, useAppSelector } from "@thor/store";
-import { setUser } from "@thor/store/slices/user/user.slice";
+import { selectUser, setUser } from "@thor/store/slices/user/user.slice";
 import Button from "@thor/system-ui/button";
 import Input from "@thor/system-ui/input";
 import clsx from "clsx";
@@ -17,7 +17,7 @@ const DashBoard = () => {
   const dispatch = useAppDispatch();
   const { roomId } = useParams();
   const navigate = useNavigate();
-  const user = useAppSelector((state) => state.user);
+  const user = useAppSelector(selectUser);
   const { t } = useTranslation();
   const [state, setState] = useState<any>({
     name: "",
@@ -54,16 +54,18 @@ const DashBoard = () => {
   return (
     <div className="flex h-full items-center justify-center">
       <div className="w-80 md:w-96  flex flex-wrap gap-6">
-        <div className="mb-10 w-full text-center">
-          <label className="text-5xl">{t("what_s_your_name")}</label>
+        <div className="w-full flex gap-3 items-center">
+          <Link
+            variant="primary"
+            className="ease-in duration-300 !p-0"
+            onClick={goBack}
+          >
+            <ArrowLeft className="w-9 h-9" />
+          </Link>
+
+          <label className="text-4xl">{t("what_s_your_name")}</label>
         </div>
-        <Link
-          variant="primary"
-          className="ease-in duration-300 absolute top-2 left-2"
-          onClick={goBack}
-        >
-          <XCircle className="w-8 h-8" />
-        </Link>
+
         <Input
           autoFocus
           value={state.name}
