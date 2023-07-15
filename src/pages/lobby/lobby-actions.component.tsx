@@ -32,8 +32,8 @@ const DashBoardActions = () => {
       <Input
         placeholder="Enter a code"
         className={clsx({
-          "peer !w-80 focus:w-full focus:md:!w-64": !code,
-          "!w-full md:!w-64": code,
+          "peer w-full md:!w-80 focus:w-52 focus:md:!w-64": !code,
+          "!w-52 md:!w-64": code,
         })}
         onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
           setCode(e.target.value)
@@ -42,7 +42,7 @@ const DashBoardActions = () => {
       />
       <Button
         className={clsx(
-          "!text-primary-500 border-x border-y border-transparent hover:border-primary-500",
+          "!text-primary-500 border-x border-y border-white dark:border-stone-950 hover:border-primary-500 dark:hover:border-primary-500",
           {
             "invisible peer-focus:visible": !code,
           }
