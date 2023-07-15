@@ -63,7 +63,9 @@ const DashBoard = () => {
             <ArrowLeft className="w-9 h-9" />
           </Link>
 
-          <label className="text-4xl">{t("what_s_your_name")}</label>
+          <label className="text-3xl md:text-4xl">
+            {t("what_s_your_name")}
+          </label>
         </div>
 
         <Input

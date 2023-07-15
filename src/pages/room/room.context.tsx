@@ -91,7 +91,7 @@ const Room = ({ children }: IProps) => {
     }));
 
     function drawGrid() {
-      refVideos.current!.className = `grid grid-flow-row w-full h-full px-8 pt-8 gap-8 ${getGridTemplate(
+      refVideos.current!.className = `grid grid-flow-row w-full h-full px-4 pt-4 md:px-8 md:pt-8 gap-4 md:gap-8 ${getGridTemplate(
         refVideos?.current?.childNodes.length || 1
       )}`;
     }

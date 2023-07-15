@@ -18,7 +18,7 @@ export default function LayoutHeader() {
   };
 
   return (
-    <header className="fixed top-0 w-full py-4 px-16 flex justify-between items-center">
+    <header className="fixed top-0 w-full py-3 px-4 md:py-4 md:px-8 flex justify-between items-center">
       <div>
         <span className="font-semibold text-primary-500 mr-1">Thor</span>Meeting
       </div>

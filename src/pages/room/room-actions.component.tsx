@@ -24,7 +24,7 @@ export default function RoomActions() {
   }
 
   return (
-    <div className="flex-initial p-6">
+    <div className="flex-initial p-4 md:p-6">
       <div className="flex flex-row">
         <div className="hidden md:block basis-1/6"></div>
         <RoomMediaActions />

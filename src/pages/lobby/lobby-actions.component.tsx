@@ -42,7 +42,7 @@ const DashBoardActions = () => {
       />
       <Button
         className={clsx(
-          "!text-primary-500 border-x border-y border-white hover:border-primary-500",
+          "!text-primary-500 border-x border-y border-transparent hover:border-primary-500",
           {
             "invisible peer-focus:visible": !code,
           }

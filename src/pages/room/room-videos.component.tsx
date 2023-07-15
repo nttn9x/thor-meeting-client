@@ -46,7 +46,7 @@ export default function RoomVideos() {
     <div className="flex-auto overflow-hidden">
       <div
         ref={refVideos!}
-        className="grid grid-flow-row w-full h-full px-8 pt-8 gap-8 grid-cols-1 grid-rows-1"
+        className="grid grid-flow-row w-full h-full px-4 pt-4 md:px-8 md:pt-8 gap-4 md:gap-8 grid-cols-1 grid-rows-1"
       >
         <div className="overflow-hidden w-full h-full rounded-lg">
           <VideoPlayer show={Boolean(device.video)} stream={localStream} />
