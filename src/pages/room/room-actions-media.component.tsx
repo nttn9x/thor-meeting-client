@@ -1,10 +1,12 @@
+import React from "react";
 import { useNavigate } from "react-router-dom";
+import clsx from "clsx";
 
 import { Mic, MicOff, PhoneOff, Video, VideoOff, Airplay } from "react-feather";
 
 import { AppRouters } from "@thor/constants";
 import Button from "@thor/system-ui/button";
-import clsx from "clsx";
+
 import { useRoomContext } from "./room.context";
 
 export default function RoomMediaActions() {

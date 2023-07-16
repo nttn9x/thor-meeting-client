@@ -1,3 +1,5 @@
+import React from "react";
+
 const LobbyBanner = () => {
   return (
     <div className="flex flex-col gap-4">

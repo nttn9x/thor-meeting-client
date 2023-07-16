@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Navigate, useNavigate, useParams } from "react-router-dom";
 import { ArrowLeft } from "react-feather";
@@ -41,7 +41,7 @@ const Welcome = () => {
     navigate(AppRouters.Lobby);
   };
 
-  const onSettingsChange = (name: string, value: Boolean) => {
+  const onSettingsChange = (name: string, value: boolean) => {
     setState((prev: any) => {
       return { ...prev, [name]: value };
     });

@@ -1,10 +1,11 @@
-import Badge from "@thor/system-ui/badge";
-
+import React from "react";
 import { Users, Share2 } from "react-feather";
+
+import Badge from "@thor/system-ui/badge";
+import Icon from "@thor/system-ui/icon";
 
 import { useRoomContext } from "./room.context";
 import RoomMediaActions from "./room-actions-media.component";
-import Icon from "@thor/system-ui/icon";
 
 export default function RoomActions() {
   const {
@@ -16,7 +17,9 @@ export default function RoomActions() {
       await navigator.clipboard.writeText(window.location.href);
 
       alert("Copied");
-    } catch (err) {}
+    } catch (err) {
+      console.log("err", err);
+    }
   };
 
   if (!localStream) {

@@ -1,11 +1,11 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { Switch as SwitchLib } from "@headlessui/react";
 
 interface IProps {
   id?: string;
   name: string;
   value?: boolean | undefined;
-  onChange: Function;
+  onChange: any;
 }
 
 export default function Switch({ onChange, value, ...rest }: IProps) {

@@ -1,3 +1,4 @@
+import React from "react";
 import Actions from "./lobby-actions.component";
 import LobbyBanner from "./lobby-banner.component";
 

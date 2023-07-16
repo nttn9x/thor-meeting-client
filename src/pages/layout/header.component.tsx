@@ -1,3 +1,4 @@
+import React from "react";
 import { useEffect, useState } from "react";
 import { Sun, Moon } from "react-feather";
 import { ThemMode, getThemeMode, setThemeMode } from "@thor/utils/theme.util";
