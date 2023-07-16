@@ -1,5 +1,5 @@
-import { lazy } from "react";
+import { lazyImport } from "@thor/utils/layout";
 
-const Welcome = lazy(() => import("./welcome.container"));
+const Welcome = lazyImport(import("./welcome.container"));
 
 export default Welcome;

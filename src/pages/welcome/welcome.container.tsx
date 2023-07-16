@@ -13,7 +13,7 @@ import Link from "@thor/system-ui/link";
 import { AppRouters } from "@thor/constants";
 import Switch from "@thor/system-ui/switch";
 
-const DashBoard = () => {
+const Welcome = () => {
   const dispatch = useAppDispatch();
   const { roomId } = useParams();
   const navigate = useNavigate();
@@ -114,4 +114,4 @@ const DashBoard = () => {
   );
 };
 
-export default DashBoard;
+export default Welcome;

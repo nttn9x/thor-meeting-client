@@ -8,6 +8,7 @@ const en = {
     back: "Back",
     audio: "Audio",
     video: "Video",
+    loading: "Loading",
   },
 };
 

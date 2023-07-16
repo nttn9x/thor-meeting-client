@@ -1,0 +1,24 @@
+.loading_circle {
+    animation: ring 1.5s linear infinite;
+}
+
+.loading_circle::before {
+    box-shadow: 0 0 1px rgba(255, 255, 255, .3);
+}
+
+@keyframes ring {
+    0% {
+        transform: rotate(0deg);
+        box-shadow: 1px 3px 1px #e65c00;
+    }
+
+    50% {
+        transform: rotate(180deg);
+        box-shadow: 1px 3px 1px #18b301;
+    }
+
+    100% {
+        transform: rotate(360deg);
+        box-shadow: 1px 3px 1px #0456c8;
+    }
+}

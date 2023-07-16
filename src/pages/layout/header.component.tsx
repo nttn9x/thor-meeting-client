@@ -1,12 +1,18 @@
 import { useEffect, useState } from "react";
 import { Sun, Moon } from "react-feather";
 import { ThemMode, getThemeMode, setThemeMode } from "@thor/utils/theme.util";
+import useSound from "@thor/context/use-sound.context";
+
+import LampSwitchMP3 from "@thor/assets/mp3/lamp_switch.mp3";
 
 export default function LayoutHeader() {
   const [mode, setMode] = useState<string>(getThemeMode());
+  const { play } = useSound(LampSwitchMP3);
 
   useEffect(() => {
     document.documentElement.className = mode;
+
+    setThemeMode(mode);
   }, [mode]);
 
   const changeMode = () => {
@@ -14,7 +20,7 @@ export default function LayoutHeader() {
 
     setMode(value);
 
-    setThemeMode(value);
+    play();
   };
 
   return (

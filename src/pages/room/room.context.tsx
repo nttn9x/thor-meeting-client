@@ -9,10 +9,14 @@ import {
 } from "react";
 import { useParams } from "react-router-dom";
 import { Socket, io } from "socket.io-client";
-import { configuration, getGridTemplate, getLocalStream } from "./room.util";
 
 import { getRandomColor } from "@thor/utils/color.util";
 import { selectUser } from "@thor/store/slices/user/user.slice";
+import useSound from "@thor/context/use-sound.context";
+
+import DoorBellMP3 from "@thor/assets/mp3/door_bell.wav";
+
+import { configuration, getGridTemplate, getLocalStream } from "./room.util";
 
 interface IProps {
   children: React.ReactNode;
@@ -54,6 +58,7 @@ export const RoomContext = createContext<IRoomContext>(initialState);
 
 const Room = ({ children }: IProps) => {
   const { roomId } = useParams();
+  const { play } = useSound(DoorBellMP3);
   const user: any = useAppSelector(selectUser);
   const refVideos = useRef<HTMLDivElement>(null);
   const [state, setState] = useState<IState>({
@@ -116,6 +121,7 @@ const Room = ({ children }: IProps) => {
         if (document.getElementById(userIdToCall)) {
           return;
         }
+        play();
 
         const video = document.createElement("video");
         video.srcObject = e.streams[0];
@@ -288,7 +294,7 @@ const Room = ({ children }: IProps) => {
 
       socket.disconnect();
     };
-  }, [state.localStream, setState, roomId, refVideos]);
+  }, [state.localStream, setState, roomId, refVideos, play]);
 
   const toggleMedia: any = useCallback(
     (type: "video" | "audio") => {
