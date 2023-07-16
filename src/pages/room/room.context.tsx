@@ -288,6 +288,7 @@ const Room = ({ children }: IProps) => {
       if (!socket) {
         return;
       }
+
       localStream.getTracks().forEach(function (track) {
         track.stop();
       });
