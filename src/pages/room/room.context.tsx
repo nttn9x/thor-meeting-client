@@ -294,7 +294,7 @@ const Room = ({ children }: IProps) => {
 
       socket.disconnect();
     };
-  }, [state.localStream, setState, roomId, refVideos, play]);
+  }, [state.localStream, setState, roomId, refVideos, play, user]);
 
   const toggleMedia: any = useCallback(
     (type: "video" | "audio") => {
