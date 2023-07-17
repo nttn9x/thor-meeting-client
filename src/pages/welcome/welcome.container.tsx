@@ -3,12 +3,12 @@ import { useTranslation } from "react-i18next";
 import { Navigate, useNavigate, useParams } from "react-router-dom";
 import { ArrowLeft } from "react-feather";
 import _isEmpty from "lodash/isEmpty";
+import clsx from "clsx";
 
 import { useAppDispatch, useAppSelector } from "@thor/store";
 import { selectUser, setUser } from "@thor/store/slices/user/user.slice";
 import Button from "@thor/system-ui/button";
 import Input from "@thor/system-ui/input";
-import clsx from "clsx";
 import Link from "@thor/system-ui/link";
 import { AppRouters } from "@thor/constants";
 import Switch from "@thor/system-ui/switch";
@@ -69,6 +69,7 @@ const Welcome = () => {
         </div>
 
         <Input
+          data-testid="name-input"
           autoFocus
           value={state.name}
           placeholder={t("enter_your_name")}
@@ -83,7 +84,11 @@ const Welcome = () => {
               onChange={onSettingsChange}
               value={state.video}
             />
-            <label className="cursor-pointer" htmlFor="video">
+            <label
+              data-testid="video-label"
+              className="cursor-pointer"
+              htmlFor="video"
+            >
               {t("video")}
             </label>
           </div>
@@ -100,6 +105,7 @@ const Welcome = () => {
           </div>
         </div>
         <Button
+          data-testid="let-talk-button"
           variant="primary"
           className={clsx("w-full", {
             invisible: !state.name,

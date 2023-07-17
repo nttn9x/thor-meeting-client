@@ -64,7 +64,10 @@ export default function RoomVideos() {
             >
               {user.name?.charAt(0)}
             </div>
-            <div className="px-4 rounded-bl-lg bg-slate-950/10 absolute bottom-0 left-0 h-8 flex items-center">
+            <div
+              data-testid="current-user-name"
+              className="px-4 rounded-bl-lg bg-slate-950/10 absolute bottom-0 left-0 h-8 flex items-center"
+            >
               {user.name}
             </div>
           </div>

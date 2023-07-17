@@ -25,11 +25,16 @@ const DashBoardActions = () => {
 
   return (
     <div className="mt-10 flex flex-wrap gap-6">
-      <Button onClick={onCreateMeeting} variant="primary">
+      <Button
+        data-testid="new-meeting-button"
+        onClick={onCreateMeeting}
+        variant="primary"
+      >
         {t("new_meeting")}
       </Button>
 
       <Input
+        data-testid="code-input"
         placeholder="Enter a code"
         className={clsx({
           "peer w-full md:!w-80 focus:w-52 focus:md:!w-64": !code,
@@ -41,6 +46,7 @@ const DashBoardActions = () => {
         onEnter={joinRoom}
       />
       <Button
+        data-testid="join-button"
         className={clsx(
           "!text-primary-500 border-x border-y border-white dark:border-stone-950 hover:border-primary-500 dark:hover:border-primary-500",
           {
