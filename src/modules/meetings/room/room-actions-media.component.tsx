@@ -68,7 +68,7 @@ export default function RoomMediaActions() {
       </Button>
 
       <Button
-        variant="primary"
+        variant="contained"
         className="bg-red-600 rounded-full w-11 md:w-12 h-11 md:h-12 px-0 flex justify-center items-center"
         onClick={cancel}
       >

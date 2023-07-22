@@ -3,7 +3,7 @@ import clsx from "clsx";
 
 import { useAppSelector } from "@thor/store";
 import { getRandomColor } from "@thor/utils/color.util";
-import { selectUser } from "@thor/store/slices/user/user.slice";
+import { selectUser } from "@thor/store/slices/room/room.slice";
 
 import { useRoomContext } from "./room.context";
 
