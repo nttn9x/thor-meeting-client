@@ -11,7 +11,7 @@ import { useParams } from "react-router-dom";
 import { Socket, io } from "socket.io-client";
 
 import { getRandomColor } from "@thor/utils/color.util";
-import { selectUser } from "@thor/store/slices/user/user.slice";
+import { selectUser } from "@thor/store/slices/room/room.slice";
 import useSound from "@thor/hook/use-sound.hook";
 
 import DoorBellMP3 from "@thor/assets/mp3/door_bell.wav";
