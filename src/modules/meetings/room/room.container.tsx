@@ -21,7 +21,7 @@ const RoomContainer = () => {
     <RoomContext>
       {isEmpty && (
         <Navigate
-          to={generatePath(MeetingRouter.Settings, {
+          to={generatePath(`../${MeetingRouter.Settings}`, {
             roomId: roomId!,
           })}
         />
