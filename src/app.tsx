@@ -3,7 +3,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 import PageLoading from "./system-ui/loading/page-loading.component";
 
-import { Meeting } from "./modules";
+import { Meeting, Apartment } from "./modules";
 import { AppRouters } from "./constants";
 import { AuthLayout, CommonLayout, Dashboard, Login } from "./pages";
 
@@ -16,10 +16,16 @@ const App = () => {
             <Route index element={<Dashboard />} />
 
             <Route path={`${AppRouters.Meeting}/*`} element={<Meeting />} />
-          </Route>
+            <Route
+              path={`${AppRouters.Apartment}/*`}
+              element={
+                <AuthLayout>
+                  <Apartment />
+                </AuthLayout>
+              }
+            />
 
-          <Route path="auth" Component={AuthLayout}>
-            <Route index element={<Login />} />
+            <Route path={AppRouters.Login} element={<Login />} />
           </Route>
         </Routes>
       </Suspense>

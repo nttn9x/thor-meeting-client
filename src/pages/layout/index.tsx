@@ -1,5 +1,10 @@
-import React from "react";
-import { Outlet } from "react-router-dom";
+import React, { useEffect } from "react";
+import { Outlet, useNavigate } from "react-router-dom";
+
+import { useAppSelector } from "@thor/store";
+import { selectUser } from "@thor/store/slices/user/user.slice";
+import { AppRouters } from "@thor/constants";
+
 import LayoutHeader from "./header.component";
 
 const CommonLayout = () => {
@@ -13,14 +18,18 @@ const CommonLayout = () => {
   );
 };
 
-const AuthLayout = () => {
-  return (
-    <>
-      <main className="h-full w-full pt-12 md:pt-14">
-        <Outlet />
-      </main>
-    </>
-  );
+const AuthLayout = ({ children }: any) => {
+  const user = useAppSelector(selectUser);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    console.log("user", user);
+    if (!user) {
+      navigate(AppRouters.Login);
+    }
+  }, [user, navigate]);
+
+  return <>{children}</>;
 };
 
 export { CommonLayout, AuthLayout };

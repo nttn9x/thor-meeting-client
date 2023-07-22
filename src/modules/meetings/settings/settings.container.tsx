@@ -12,7 +12,7 @@ import {
 
 import { MeetingRouter } from "@thor/constants";
 import { useAppDispatch, useAppSelector } from "@thor/store";
-import { selectUser, setUser } from "@thor/store/slices/user/user.slice";
+import { selectUser, setUser } from "@thor/store/slices/room/room.slice";
 
 import Button from "@thor/system-ui/button";
 import Input from "@thor/system-ui/input";

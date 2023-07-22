@@ -2,10 +2,10 @@ import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
 import { RootState } from "@thor/store";
 
-import { initialState, SetUserPayLoad } from "./user.constant";
+import { initialState, SetUserPayLoad } from "./room.constant";
 
-export const userSlice = createSlice({
-  name: "user",
+export const roomSlice = createSlice({
+  name: "room",
   initialState,
   reducers: {
     setUser: (state, action: PayloadAction<SetUserPayLoad>) => {
@@ -17,8 +17,8 @@ export const userSlice = createSlice({
   },
 });
 
-export const { setUser } = userSlice.actions;
+export const { setUser } = roomSlice.actions;
 
-export const selectUser = (state: RootState) => state.user;
+export const selectUser = (state: RootState) => state.room;
 
-export default userSlice;
+export default roomSlice;

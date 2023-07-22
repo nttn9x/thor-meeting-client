@@ -6,6 +6,7 @@ export enum MeetingRouter {
 
 export enum AppRouters {
   Root = "/",
+  Login = "/login",
   Meeting = "/meeting",
   Apartment = "/apartment",
 }
