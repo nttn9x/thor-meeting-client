@@ -1,8 +1,9 @@
 import React from "react";
-import { Navigate, useParams } from "react-router-dom";
+import { Navigate, generatePath, useParams } from "react-router-dom";
 import _isEmpty from "lodash/isEmpty";
 
 import { useAppSelector } from "@thor/store";
+import { MeetingRouter } from "@thor/constants";
 import { selectUser } from "@thor/store/slices/room/room.slice";
 
 import Actions from "./room-actions.component";
@@ -18,7 +19,13 @@ const RoomContainer = () => {
 
   return (
     <RoomContext>
-      {isEmpty && <Navigate to={`/name/${roomId}`} />}
+      {isEmpty && (
+        <Navigate
+          to={generatePath(MeetingRouter.Settings, {
+            roomId: roomId!,
+          })}
+        />
+      )}
       {!isEmpty && (
         <div className="flex flex-col h-full w-full">
           <Videos />
