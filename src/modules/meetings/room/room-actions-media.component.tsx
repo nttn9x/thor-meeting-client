@@ -17,7 +17,7 @@ export default function RoomMediaActions() {
   } = useRoomContext();
 
   const cancel = () => {
-    navigate(AppRouters.Lobby, { replace: true });
+    navigate(AppRouters.Meeting, { replace: true });
   };
 
   return (

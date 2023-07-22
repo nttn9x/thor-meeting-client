@@ -1,5 +1,11 @@
+export enum MeetingRouter {
+  Lobby = "/meeting",
+  Settings = "settings/:roomId",
+  Room = "room/:roomId",
+}
+
 export enum AppRouters {
-  Welcome = "/name/:roomId",
-  Lobby = "/",
-  Room = "/room/:roomId",
+  Root = "/",
+  Meeting = "/meeting",
+  Apartment = "/apartment",
 }

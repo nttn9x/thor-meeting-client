@@ -1,19 +1,25 @@
-import React, { useState } from "react";
-import { useTranslation } from "react-i18next";
-import { Navigate, useNavigate, useParams } from "react-router-dom";
-import { ArrowLeft } from "react-feather";
-import _isEmpty from "lodash/isEmpty";
 import clsx from "clsx";
+import _isEmpty from "lodash/isEmpty";
+import React, { useState } from "react";
+import { ArrowLeft } from "react-feather";
+import { useTranslation } from "react-i18next";
+import {
+  Navigate,
+  generatePath,
+  useNavigate,
+  useParams,
+} from "react-router-dom";
 
+import { MeetingRouter } from "@thor/constants";
 import { useAppDispatch, useAppSelector } from "@thor/store";
 import { selectUser, setUser } from "@thor/store/slices/user/user.slice";
+
 import Button from "@thor/system-ui/button";
 import Input from "@thor/system-ui/input";
 import Link from "@thor/system-ui/link";
-import { AppRouters } from "@thor/constants";
 import Switch from "@thor/system-ui/switch";
 
-const Welcome = () => {
+const Settings = () => {
   const dispatch = useAppDispatch();
   const { roomId } = useParams();
   const navigate = useNavigate();
@@ -38,7 +44,7 @@ const Welcome = () => {
   };
 
   const goBack = () => {
-    navigate(AppRouters.Lobby);
+    navigate("..");
   };
 
   const onSettingsChange = (name: string, value: boolean) => {
@@ -48,7 +54,14 @@ const Welcome = () => {
   };
 
   if (!_isEmpty(user)) {
-    return <Navigate to={`/room/${roomId}`} replace={true} />;
+    return (
+      <Navigate
+        to={generatePath(`../${MeetingRouter.Room}`, {
+          roomId: roomId!,
+        })}
+        replace={true}
+      />
+    );
   }
 
   return (
@@ -106,10 +119,10 @@ const Welcome = () => {
         </div>
         <Button
           data-testid="let-talk-button"
-          variant="primary"
+          variant="contained"
           className={clsx("w-full", {
             invisible: !state.name,
-            visible: name,
+            visible: state.name,
           })}
           onClick={join}
         >
@@ -120,4 +133,4 @@ const Welcome = () => {
   );
 };
 
-export default Welcome;
+export default Settings;

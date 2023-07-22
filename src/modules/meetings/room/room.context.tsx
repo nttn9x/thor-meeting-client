@@ -12,7 +12,7 @@ import { Socket, io } from "socket.io-client";
 
 import { getRandomColor } from "@thor/utils/color.util";
 import { selectUser } from "@thor/store/slices/user/user.slice";
-import useSound from "@thor/context/use-sound.context";
+import useSound from "@thor/hook/use-sound.hook";
 
 import DoorBellMP3 from "@thor/assets/mp3/door_bell.wav";
 

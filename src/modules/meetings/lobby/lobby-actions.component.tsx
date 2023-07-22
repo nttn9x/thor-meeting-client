@@ -2,10 +2,11 @@ import React, { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import clsx from "clsx";
 import { useTranslation } from "react-i18next";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, generatePath } from "react-router-dom";
 
 import Button from "@thor/system-ui/button";
 import Input from "@thor/system-ui/input";
+import { MeetingRouter } from "@thor/constants";
 
 const DashBoardActions = () => {
   const navigate = useNavigate();
@@ -13,14 +14,23 @@ const DashBoardActions = () => {
   const [code, setCode] = useState<string>();
 
   const onCreateMeeting = () => {
-    navigate(`/name/${uuidv4()}`);
+    navigate(
+      generatePath(MeetingRouter.Settings, {
+        roomId: uuidv4(),
+      })
+    );
   };
 
   const joinRoom = () => {
     if (!code) {
       return;
     }
-    navigate(`/name/${code}`);
+
+    navigate(
+      generatePath(MeetingRouter.Settings, {
+        roomId: code,
+      })
+    );
   };
 
   return (
@@ -28,7 +38,7 @@ const DashBoardActions = () => {
       <Button
         data-testid="new-meeting-button"
         onClick={onCreateMeeting}
-        variant="primary"
+        variant="contained"
       >
         {t("new_meeting")}
       </Button>

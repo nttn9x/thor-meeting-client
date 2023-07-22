@@ -9,6 +9,9 @@ const en = {
     audio: "Audio",
     video: "Video",
     loading: "Loading",
+    username: "Username",
+    password: "Password",
+    login: "Login",
   },
 };
 

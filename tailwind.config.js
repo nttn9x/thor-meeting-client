@@ -7,10 +7,13 @@ export default {
     colors: {
       primary: colors.orange,
       slate: colors.slate,
+      orange: colors.orange,
       red: colors.red,
       gray: colors.gray,
       stone: colors.stone,
       white: colors.white,
+      indigo: colors.indigo,
+      purple: colors.purple,
     },
   },
   plugins: [require("@tailwindcss/typography")],
