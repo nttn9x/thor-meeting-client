@@ -1,5 +1,6 @@
 export interface IUserState {
-  name?: string;
+  username?: string;
+  password?: string;
 }
 
 export interface SetUserPayLoad {

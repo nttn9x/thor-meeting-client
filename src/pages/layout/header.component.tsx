@@ -15,12 +15,16 @@ export default function LayoutHeader() {
   };
 
   return (
-    <header className="fixed top-0 w-full py-3 px-4 md:py-4 md:px-8 flex justify-between items-center">
-      <div onClick={goToDashboard} className="cursor-pointer">
+    <header className="header fixed top-0 w-full py-3 px-4 md:py-4 md:px-8 flex justify-between items-center">
+      <div onClick={goToDashboard} className="cursor-pointer hidden-cursor">
         <span className="font-semibold text-primary-500 mr-1">Thor</span>Meeting
       </div>
-      <button onClick={changeMode}>
-        {mode === ThemMode.Dark ? <Moon /> : <Sun />}
+      <button className="hidden-cursor" onClick={changeMode}>
+        {mode === ThemMode.Dark ? (
+          <Moon className="pointer-events-none" />
+        ) : (
+          <Sun className="pointer-events-none" />
+        )}
       </button>
     </header>
   );

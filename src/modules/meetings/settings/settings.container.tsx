@@ -1,57 +1,21 @@
 import clsx from "clsx";
 import _isEmpty from "lodash/isEmpty";
-import React, { useState } from "react";
+import React from "react";
 import { ArrowLeft } from "react-feather";
-import { useTranslation } from "react-i18next";
-import {
-  Navigate,
-  generatePath,
-  useNavigate,
-  useParams,
-} from "react-router-dom";
+import { Navigate, generatePath, useParams } from "react-router-dom";
 
 import { MeetingRouter } from "@thor/constants";
-import { useAppDispatch, useAppSelector } from "@thor/store";
-import { selectUser, setUser } from "@thor/store/slices/room/room.slice";
 
 import Button from "@thor/system-ui/button";
 import Input from "@thor/system-ui/input";
 import Link from "@thor/system-ui/link";
 import Switch from "@thor/system-ui/switch";
+import useSettingsHook from "./settings.hook";
 
 const Settings = () => {
-  const dispatch = useAppDispatch();
   const { roomId } = useParams();
-  const navigate = useNavigate();
-  const user = useAppSelector(selectUser);
-  const { t } = useTranslation();
-  const [state, setState] = useState<any>({
-    name: "",
-    video: true,
-    audio: true,
-  });
-
-  const onNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setState((prev: any) => ({ ...prev, name: e.target.value }));
-  };
-
-  const join = () => {
-    if (!state.name) {
-      return;
-    }
-
-    dispatch(setUser({ user: { ...state } }));
-  };
-
-  const goBack = () => {
-    navigate("..");
-  };
-
-  const onSettingsChange = (name: string, value: boolean) => {
-    setState((prev: any) => {
-      return { ...prev, [name]: value };
-    });
-  };
+  const { state, t, user, goBack, onSettingsChange, onNameChange, join } =
+    useSettingsHook();
 
   if (!_isEmpty(user)) {
     return (

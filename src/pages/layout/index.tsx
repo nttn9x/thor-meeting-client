@@ -11,7 +11,7 @@ const CommonLayout = () => {
   return (
     <>
       <LayoutHeader />
-      <main className="h-full w-full pt-12 md:pt-14">
+      <main className="h-screen w-full pt-12 md:pt-14">
         <Outlet />
       </main>
     </>
@@ -23,7 +23,6 @@ const AuthLayout = ({ children }: any) => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    console.log("user", user);
     if (!user) {
       navigate(AppRouters.Login);
     }

@@ -25,6 +25,12 @@ const Dashboard = () => {
       >
         Apartment
       </div>
+      <div
+        className="bg-gradient-to-r to-orange-600 from-red-500 hover:bg-none hover:bg-white hover:text-primary-500 rounded-lg w-[250px] h-[250px] flex items-center justify-center text-xl cursor-pointer"
+        onClick={goTo(AppRouters.Portfolio)}
+      >
+        Portfolio
+      </div>
     </div>
   );
 };

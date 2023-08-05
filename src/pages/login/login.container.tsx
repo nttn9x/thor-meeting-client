@@ -1,36 +1,43 @@
 import React from "react";
-import { useTranslation } from "react-i18next";
-import { useNavigate } from "react-router-dom";
+import { Navigate, generatePath } from "react-router-dom";
+import _isEmpty from "lodash/isEmpty";
 
-import TextField from "@thor/system-ui/text-field";
-import Button from "@thor/system-ui/button";
-import { useAppDispatch } from "@thor/store";
-import { setUser } from "@thor/store/slices/user/user.slice";
+import { Button, TextField } from "@thor/system-ui";
+
 import { AppRouters } from "@thor/constants";
+import useLoginHook from "./login.hook";
 
 const Login = () => {
-  const { t } = useTranslation();
-  const navigate = useNavigate();
-  const dispatch = useAppDispatch();
-
-  const login = () => {
-    dispatch(setUser({ user: {} }));
-
-    navigate(AppRouters.Apartment)
-  };
+  const { t, user, onSubmit, register, handleSubmit, errors } = useLoginHook();
+  if (!_isEmpty(user)) {
+    return (
+      <Navigate
+        to={generatePath(`../${AppRouters.Apartment}`)}
+        replace={true}
+      />
+    );
+  }
 
   return (
     <div className="flex justify-center items-center h-full">
-      <div className="w-[400px]">
+      <form onSubmit={handleSubmit(onSubmit)} className="w-[400px]">
         <div className="flex flex-col gap-6">
-          <TextField label={t("username")} />
+          <TextField
+            inputProps={{ ...register("username") }}
+            label={t("username")}
+            errorMessage={errors.username?.message}
+          />
 
-          <TextField label={t("password")} />
+          <TextField
+            inputProps={{ ...register("password") }}
+            label={t("password")}
+            errorMessage={errors.password?.message}
+          />
         </div>
-        <Button className="mt-8 w-full" variant="contained" onClick={login}>
+        <Button className="mt-8 w-full" variant="contained" type="submit">
           {t("login")}
         </Button>
-      </div>
+      </form>
     </div>
   );
 };

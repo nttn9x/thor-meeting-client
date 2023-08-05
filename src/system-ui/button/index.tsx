@@ -1,10 +1,9 @@
 import clsx from "clsx";
 import React from "react";
 
-interface IButton extends React.HTMLAttributes<HTMLButtonElement> {
+interface IButton extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: "text" | "contained" | "outlined";
   color?: "primary";
-  disabled?: boolean;
 }
 
 export default function Button({

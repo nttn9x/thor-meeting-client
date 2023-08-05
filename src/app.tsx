@@ -3,9 +3,11 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 import PageLoading from "./system-ui/loading/page-loading.component";
 
-import { Meeting, Apartment } from "./modules";
 import { AppRouters } from "./constants";
+
 import { AuthLayout, CommonLayout, Dashboard, Login } from "./pages";
+
+import { Meeting, Apartment, Portfolio } from "./modules";
 
 const App = () => {
   return (
@@ -14,7 +16,6 @@ const App = () => {
         <Routes>
           <Route path="/" Component={CommonLayout}>
             <Route index element={<Dashboard />} />
-
             <Route path={`${AppRouters.Meeting}/*`} element={<Meeting />} />
             <Route
               path={`${AppRouters.Apartment}/*`}
@@ -24,9 +25,9 @@ const App = () => {
                 </AuthLayout>
               }
             />
-
             <Route path={AppRouters.Login} element={<Login />} />
           </Route>
+          <Route path={`${AppRouters.Portfolio}/*`} element={<Portfolio />} />
         </Routes>
       </Suspense>
     </BrowserRouter>
