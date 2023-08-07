@@ -12,7 +12,7 @@ export default function AboutPartOne({ mask }: IAboutPartOne) {
         <div className="flex flex-col gap-4 mt-32">
           <Header title={"ABOUT ME"} />
 
-          <p className="text-5xl font-bold content">
+          <p className="text-6xl font-bold content">
             {!mask && (
               <>
                 I'm a{" "}

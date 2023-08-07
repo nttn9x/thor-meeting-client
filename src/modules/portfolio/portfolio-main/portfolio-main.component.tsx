@@ -8,11 +8,9 @@ import "./portfolio-main.scss";
 import Banner from "../portfolio-banner/portfolio-banner.component";
 import About from "../portfolio-about/portfolio-about.component";
 import Experience from "../portfolio-experience/portfolio-experience.component";
-// import Menu from "../menu.component";
-// import Project from "../project.component";
 import { usePortfolioContext } from "../portfolio.context";
 
-// import Footer from "@me/app/footer";
+import Footer from "../portfolio-footer.component";
 
 const Portfolio = () => {
   const { root, mask } = usePortfolioContext();
@@ -21,13 +19,13 @@ const Portfolio = () => {
     <>
       <div
         ref={root}
-        className="layer z-0 flex flex-col text-stone-600 dark:bg-stone-900 dark:text-[--text-body]"
+        className="z-0 flex flex-col text-stone-600 dark:text-[--text-body]"
       >
         <LayoutHeader />
         <Banner />
         <About />
         <Experience />
-        {/* <Footer /> */}
+        <Footer />
       </div>
 
       <div
@@ -41,8 +39,7 @@ const Portfolio = () => {
         <Banner mask />
         <About mask />
         <Experience />
-        {/*
-          <Footer /> */}
+        <Footer />
       </div>
     </>
   );

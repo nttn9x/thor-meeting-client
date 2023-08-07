@@ -35,8 +35,8 @@ const Portfolio = ({ children }: IProps) => {
     const ctx = gsap.context((self: any) => {
       const contents = gsap.utils.toArray<HTMLDivElement>(".content");
 
-      const toggleCursor = (show?: boolean) => {
-        if (show) {
+      const toggleSizedCursor = (large?: boolean) => {
+        if (large) {
           gsap.to(mask.current, {
             "--size": "300px",
             duration: 0.4,
@@ -51,14 +51,31 @@ const Portfolio = ({ children }: IProps) => {
         }
       };
 
+      const toggleShowHideCursor = (show?: boolean) => {
+        gsap.killTweensOf(".hidden-cursor");
+        if (show) {
+          gsap.to(mask.current, {
+            "--size": "0px",
+            duration: 0.3,
+            ease: "sine.out",
+          });
+        } else {
+          gsap.to(mask.current, {
+            "--size": "30px",
+            duration: 1,
+            ease: "sine.out",
+          });
+        }
+      };
+
       if (contents) {
         for (let i = 0; i < contents.length; i++) {
           contents[i].addEventListener("mousemove", function () {
-            toggleCursor(true);
+            toggleSizedCursor(true);
           });
 
           contents[i].addEventListener("mouseleave", function () {
-            toggleCursor(false);
+            toggleSizedCursor(false);
           });
         }
       }
@@ -104,8 +121,11 @@ const Portfolio = ({ children }: IProps) => {
         mask.current?.setAttribute("data-y", y);
 
         let isHovered;
+        let isHovered1;
 
         const nodes = root.current?.querySelectorAll(".content") || [];
+        const hiddenNodes =
+          root.current?.querySelectorAll(".hidden-cursor") || [];
         for (let i = 0; i < nodes.length; i++) {
           const bounding_rect = nodes[i].getBoundingClientRect();
 
@@ -122,25 +142,38 @@ const Portfolio = ({ children }: IProps) => {
           }
         }
 
-        toggleCursor(isHovered);
+        for (let i = 0; i < hiddenNodes.length; i++) {
+          const bounding_rect = hiddenNodes[i].getBoundingClientRect();
+
+          if (
+            mouse_pos.x > bounding_rect.left &&
+            mouse_pos.x < bounding_rect.right &&
+            y > bounding_rect.top + lastScrolledTop &&
+            y < bounding_rect.bottom + lastScrolledTop
+          ) {
+            isHovered1 = true;
+            break;
+          } else {
+            isHovered1 = false;
+          }
+        }
+
+        if (isHovered1) {
+          toggleShowHideCursor(isHovered1);
+        } else {
+          toggleSizedCursor(isHovered);
+        }
       });
 
       const headers = root.current?.querySelectorAll(".hidden-cursor");
       if (headers) {
         for (let i = 0; i < headers.length; i++) {
           headers[i].addEventListener("mousemove", function () {
-            gsap.to(mask.current, {
-              "--size": "0px",
-              duration: 0.3,
-              ease: "sine.out",
-            });
+            toggleShowHideCursor(true);
           });
           headers[i].addEventListener("mouseout", function () {
-            gsap.to(mask.current, {
-              "--size": "30px",
-              duration: 1,
-              ease: "sine.out",
-            });
+            console.log("headers");
+            toggleShowHideCursor(false);
           });
         }
       }
@@ -152,7 +185,7 @@ const Portfolio = ({ children }: IProps) => {
           scrollTrigger: {
             trigger: box,
             start: "bottom bottom",
-            end: "top 0%",
+            end: "top 20%",
             scrub: true,
           },
         });
