@@ -15,16 +15,19 @@ export default function AboutPartOne({ mask }: IAboutPartOne) {
           <p className="text-6xl font-bold content">
             {!mask && (
               <>
-                I'm a{" "}
-                <span className="text-primary-500">specifically skilled</span>{" "}
+                {"I'm a "}
+                <span className="text-primary-500">
+                  specifically skilled
+                </span>{" "}
                 guy with strong focus on producing hight quality & impactful
                 smooth user experience
               </>
             )}
             {mask && (
               <>
-                A programmer with skills that haven't been replaced by A.I yet -
-                Creating awesome things only if the paycheck is equal good
+                {
+                  "A programmer with skills that haven't been replaced by A.I yet - Creating awesome things only if the paycheck is equal good"
+                }
               </>
             )}
           </p>

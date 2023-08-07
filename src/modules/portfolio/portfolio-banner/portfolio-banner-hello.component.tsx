@@ -10,7 +10,9 @@ export default function BannerInfo({ mask }: IBannerInfo) {
     <div className={styles.infoContainer}>
       <div className={"content"}>
         <div className="text-base">
-          <span className="text-secondary">{mask ? "Hey" : "Hi"}, I'm </span>
+          <span className="text-secondary">
+            {mask ? "Hey, I'm" : "Hi, I'm"}
+          </span>
           <span className={mask ? "text-white" : `text-primary-500`}>
             Nguyen
           </span>

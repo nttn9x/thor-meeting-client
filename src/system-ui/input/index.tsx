@@ -28,4 +28,6 @@ const Input = forwardRef<IInput, any>(
   }
 );
 
+Input.displayName = "Input";
+
 export default Input;

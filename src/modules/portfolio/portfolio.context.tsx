@@ -80,7 +80,7 @@ const Portfolio = ({ children }: IProps) => {
         }
       }
 
-      let mouse_pos = { x: 0, y: 0, scrollY: 0, lastY: 0 };
+      const mouse_pos = { x: 0, y: 0, scrollY: 0, lastY: 0 };
       document.addEventListener("mousemove", (e: MouseEvent) => {
         const x = e.pageX;
         const y = e.pageY;

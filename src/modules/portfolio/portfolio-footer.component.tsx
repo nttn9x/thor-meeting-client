@@ -4,6 +4,7 @@ export default function Footer() {
     <footer className="h-44 mt-44 flex justify-center items-center">
       Built with
       <a
+        rel="noopener noreferrer"
         href="https://nextjs.org/"
         className="text-primary mx-1"
         target="_blank"
@@ -12,6 +13,7 @@ export default function Footer() {
       </a>
       and
       <a
+        rel="noopener noreferrer"
         href="https://tailwindcss.com/"
         className="text-primary  mx-1"
         target="_blank"
@@ -19,7 +21,11 @@ export default function Footer() {
         Tailwind CSS
       </a>
       , deployed with
-      <a href="https://aws.amazon.com/" className="text-primary  mx-1">
+      <a
+        rel="noopener noreferrer"
+        href="https://aws.amazon.com/"
+        className="text-primary  mx-1"
+      >
         AWS
       </a>
     </footer>
