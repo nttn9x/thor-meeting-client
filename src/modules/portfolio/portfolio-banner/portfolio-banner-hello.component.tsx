@@ -11,7 +11,7 @@ export default function BannerInfo({ mask }: IBannerInfo) {
       <div className={"content"}>
         <div className="text-base">
           <span className="text-secondary">
-            {mask ? "Hey, I'm" : "Hi, I'm"}
+            {mask ? "Hey, I'm " : "Hi, I'm "}
           </span>
           <span className={mask ? "text-white" : `text-primary-500`}>
             Nguyen
