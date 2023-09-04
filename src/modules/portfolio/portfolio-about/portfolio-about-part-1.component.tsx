@@ -19,7 +19,7 @@ export default function AboutPartOne({ mask }: IAboutPartOne) {
                 <span className="text-primary-500">
                   specifically skilled
                 </span>{" "}
-                guy with strong focus on producing hight quality & impactful
+                guy with strong focus on producing high-quality & impactful
                 smooth user experience
               </>
             )}
